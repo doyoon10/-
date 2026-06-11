@@ -473,7 +473,10 @@
       <button class="filter-chip" id="filterFolder" onclick="setFilter('folder')"><i class="ti ti-folder"></i><span id="filterFolderName">폴더</span></button>
       <button class="filter-chip" id="filterNone" onclick="setFilter('none')"><i class="ti ti-file"></i>미분류</button>
     </div>
-    <div class="drop-zone-none" id="docGridWrap">
+    <div class="drop-zone-none" id="docGridWrap"
+      ondragover="onNoneZoneDragOver(event)"
+      ondragleave="onNoneZoneDragLeave(event)"
+      ondrop="onNoneZoneDrop(event)">
     <div class="doc-grid" id="docGrid"></div>
     </div>
 
@@ -720,7 +723,12 @@ function renderHome() {
     fg.innerHTML = folders.map(f => {
       const cnt = docs.filter(d => d.folderId === f.id && (d.body || d.title)).length;
       const isActive = activeFolderId === f.id;
-      return `<div class="folder-card${isActive ? ' active-folder' : ''}" onclick="clickFolder('${f.id}')">
+      return `<div class="folder-card${isActive ? ' active-folder' : ''}"
+        data-folder-id="${f.id}"
+        onclick="clickFolder('${f.id}')"
+        ondragover="onFolderDragOver(event,'${f.id}')"
+        ondragleave="onFolderDragLeave(event)"
+        ondrop="onFolderDrop(event,'${f.id}')">
         <button class="folder-del" onclick="event.stopPropagation();deleteFolder('${f.id}')" aria-label="폴더 삭제"><i class="ti ti-x"></i></button>
         <i class="ti ti-folder${isActive ? '-open' : ''} folder-icon"></i>
         <div class="folder-info">
