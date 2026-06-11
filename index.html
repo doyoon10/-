@@ -333,6 +333,20 @@
   }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
+  /* KR INLINE EDIT */
+  .editable-kr { cursor: pointer; border-radius: 4px; transition: background 0.12s; }
+  .editable-kr:hover { background: var(--surface2); }
+  .read-kr-empty { color: var(--text3) !important; font-style: italic; }
+  .editing-kr { cursor: default; background: var(--surface2) !important; padding: 6px 8px !important; border-radius: 6px; }
+  .kr-edit-input {
+    width: 100%; border: 0.5px solid var(--border-md); border-radius: var(--radius-sm);
+    padding: 6px 8px; font-size: 13px; font-family: inherit; line-height: 1.6;
+    background: var(--surface); color: var(--text); resize: none; outline: none;
+    min-height: 38px; display: block; margin-bottom: 6px;
+  }
+  .kr-edit-input:focus { border-color: var(--sky-text); }
+  .kr-edit-actions { display: flex; gap: 6px; justify-content: flex-end; }
+
   .divider { height: 0.5px; background: var(--border); margin: 24px 0; }
 
   /* KR ALWAYS VISIBLE */
@@ -948,9 +962,59 @@ function renderReadTab(doc) {
       <span class="read-num">${i+1}</span>
       <div class="read-text">
         <div class="read-en" id="readEn_${i}">${buildReadEnHtml(s, i, doc)}</div>
-        ${krs[i] ? `<div class="read-kr" id="readKr_${i}">${esc(krs[i])}</div>` : ''}
+        ${krs[i]
+          ? `<div class="read-kr editable-kr" id="readKr_${i}" title="클릭해서 번역 수정" onclick="editKr(${i})">${esc(krs[i])}</div>`
+          : `<div class="read-kr editable-kr read-kr-empty" id="readKr_${i}" title="클릭해서 번역 추가" onclick="editKr(${i})">번역 추가…</div>`
+        }
       </div>
     </div>`).join('');
+}
+
+function editKr(idx) {
+  const doc = docs.find(d => d.id === currentId);
+  if (!doc) return;
+  const krs = doc.translation ? parseSentences(doc.translation) : [];
+  const current = krs[idx] || '';
+  const el = document.getElementById('readKr_' + idx);
+  if (!el || el.querySelector('textarea')) return;
+
+  el.classList.add('editing-kr');
+  el.removeAttribute('onclick');
+  el.innerHTML = `<textarea class="kr-edit-input" id="krEditInput_${idx}" spellcheck="false">${esc(current)}</textarea>
+    <div class="kr-edit-actions">
+      <button class="btn" onclick="cancelKr(${idx})">취소</button>
+      <button class="btn btn-dark" onclick="saveKr(${idx})">저장</button>
+    </div>`;
+  const ta = document.getElementById('krEditInput_' + idx);
+  ta.focus();
+  ta.setSelectionRange(ta.value.length, ta.value.length);
+  ta.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); saveKr(idx); }
+    if (e.key === 'Escape') cancelKr(idx);
+  });
+}
+
+function saveKr(idx) {
+  const doc = docs.find(d => d.id === currentId);
+  if (!doc) return;
+  const sents = parseSentences(doc.body);
+  const krs = doc.translation ? parseSentences(doc.translation) : [];
+  // fill gaps
+  while (krs.length < sents.length) krs.push('');
+  const newVal = (document.getElementById('krEditInput_' + idx)?.value || '').trim();
+  krs[idx] = newVal;
+  doc.translation = krs.join(' ');
+  saveData();
+  renderReadTab(doc);
+  if (document.getElementById('readView').classList.contains('kr-always')) {
+    document.getElementById('readView').classList.add('kr-always');
+  }
+  toast('번역을 수정했어요 ✓');
+}
+
+function cancelKr(idx) {
+  const doc = docs.find(d => d.id === currentId);
+  if (doc) renderReadTab(doc);
 }
 
 function buildReadEnHtml(sentence, sentIdx, doc) {
