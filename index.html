@@ -334,6 +334,110 @@
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
   .divider { height: 0.5px; background: var(--border); margin: 24px 0; }
+
+  /* KR ALWAYS VISIBLE */
+  .kr-always .read-kr { display: block !important; }
+
+  /* HIGHLIGHT */
+  .hl-yellow { background: #ffe066; border-radius: 3px; padding: 0 1px; color: #7a5500; }
+  .hl-green  { background: #b6f5c8; border-radius: 3px; padding: 0 1px; color: #166534; }
+  .hl-blue   { background: #bae0ff; border-radius: 3px; padding: 0 1px; color: #0c4a6e; }
+  .hl-pink   { background: #fbc8e0; border-radius: 3px; padding: 0 1px; color: #7c1d4e; }
+  @media (prefers-color-scheme: dark) {
+    .hl-yellow { background: #7a5500; color: #ffe066; }
+    .hl-green  { background: #14532d; color: #86efac; }
+    .hl-blue   { background: #0c3254; color: #93c5fd; }
+    .hl-pink   { background: #4a1030; color: #f9a8d4; }
+  }
+
+  /* HIGHLIGHT TOOLBAR */
+  .hl-toolbar {
+    position: fixed; z-index: 200;
+    background: var(--surface); border: 0.5px solid var(--border-md);
+    border-radius: var(--radius); padding: 6px 8px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.14);
+    display: flex; gap: 5px; align-items: center;
+  }
+  .hl-toolbar.hidden { display: none; }
+  .hl-color-btn {
+    width: 22px; height: 22px; border-radius: 50%; border: 2px solid transparent;
+    cursor: pointer; transition: transform 0.1s, border-color 0.1s;
+  }
+  .hl-color-btn:hover { transform: scale(1.2); border-color: var(--border-md); }
+  .hl-erase-btn {
+    background: none; border: 0.5px solid var(--border-md);
+    border-radius: var(--radius-sm); cursor: pointer;
+    color: var(--text2); font-size: 12px; padding: 3px 7px;
+    font-family: inherit; transition: all 0.1s;
+  }
+  .hl-erase-btn:hover { background: var(--surface2); color: var(--red); }
+  .hl-memo-btn {
+    background: none; border: 0.5px solid var(--border-md);
+    border-radius: var(--radius-sm); cursor: pointer;
+    color: var(--text2); font-size: 12px; padding: 3px 7px;
+    font-family: inherit; display: flex; align-items: center; gap: 3px; transition: all 0.1s;
+  }
+  .hl-memo-btn:hover { background: var(--sky); color: var(--sky-text); }
+  .hl-sep { width: 0.5px; height: 18px; background: var(--border-md); margin: 0 2px; }
+
+  /* MEMO TOOLTIP */
+  .memo-span {
+    border-bottom: 1.5px dotted var(--sky-text);
+    cursor: pointer;
+    position: relative;
+  }
+  .memo-tooltip {
+    position: fixed; z-index: 300;
+    background: var(--text); color: var(--bg);
+    font-size: 12px; line-height: 1.6;
+    padding: 8px 12px; border-radius: var(--radius-sm);
+    max-width: 260px; pointer-events: none;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+    white-space: pre-wrap;
+  }
+  .memo-tooltip.hidden { display: none; }
+
+  /* MEMO INPUT POPUP */
+  .memo-input-popup {
+    position: fixed; z-index: 250;
+    background: var(--surface); border: 0.5px solid var(--border-md);
+    border-radius: var(--radius); padding: 12px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.16);
+    width: 280px;
+  }
+  .memo-input-popup.hidden { display: none; }
+  .memo-input-popup textarea {
+    width: 100%; border: 0.5px solid var(--border-md);
+    border-radius: var(--radius-sm); padding: 8px 10px;
+    font-size: 13px; line-height: 1.6; font-family: inherit;
+    background: var(--surface2); color: var(--text);
+    resize: none; outline: none; min-height: 70px; margin-bottom: 8px; display: block;
+  }
+  .memo-input-popup .popup-actions { display: flex; justify-content: flex-end; gap: 6px; }
+
+  /* BLANK MODE */
+  .blank-sent-row { margin-bottom: 16px; }
+  .blank-sent-label { font-size: 11px; color: var(--text3); margin-bottom: 6px; font-variant-numeric: tabular-nums; }
+  .blank-sent-text { font-size: 14px; line-height: 2.2; }
+  .blank-word {
+    display: inline; cursor: pointer; padding: 1px 2px; border-radius: 3px;
+    transition: background 0.1s;
+  }
+  .blank-word:hover { background: var(--surface2); }
+  .blank-word.blanked {
+    display: inline-block;
+    background: var(--surface2); border: 0.5px solid var(--border-md);
+    border-radius: 4px; min-width: 3.5em; cursor: default;
+    vertical-align: middle;
+  }
+  .blank-word.blanked input {
+    border: none; outline: none; background: transparent;
+    font-size: 14px; font-family: inherit; color: var(--text);
+    width: 100%; min-width: 3em; padding: 0 4px; line-height: 1.8;
+  }
+  .blank-word.correct-blank { background: var(--green) !important; border-color: transparent !important; }
+  .blank-word.wrong-blank { background: var(--red-bg) !important; border-color: var(--red) !important; }
+
 </style>
 </head>
 <body>
@@ -417,12 +521,20 @@
       <button class="back-btn" onclick="showScreen('editorScreen')" aria-label="편집으로"><i class="ti ti-arrow-left"></i></button>
       <div class="topbar-title" id="memoTitle"></div>
     </div>
-    <div class="memo-tabs">
-      <button class="memo-tab active" id="tabRead" onclick="switchTab('read')"><i class="ti ti-book" style="font-size:14px;vertical-align:-1px"></i> 원문 보기</button>
-      <button class="memo-tab" id="tabWrite" onclick="switchTab('write')"><i class="ti ti-pencil" style="font-size:14px;vertical-align:-1px"></i> 본문 적기</button>
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:22px">
+      <div class="memo-tabs" style="margin-bottom:0">
+        <button class="memo-tab active" id="tabRead" onclick="switchTab('read')"><i class="ti ti-book" style="font-size:14px;vertical-align:-1px"></i> 원문 보기</button>
+        <button class="memo-tab" id="tabWrite" onclick="switchTab('write')"><i class="ti ti-pencil" style="font-size:14px;vertical-align:-1px"></i> 본문 적기</button>
+        <button class="memo-tab" id="tabBlank" onclick="switchTab('blank')"><i class="ti ti-puzzle" style="font-size:14px;vertical-align:-1px"></i> 빈칸 채우기</button>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="btn" id="krToggleBtn" onclick="toggleKrVisible()" title="한글 번역 표시/숨김">
+          <i class="ti ti-language"></i><span id="krToggleLabel">번역 항상 보기</span>
+        </button>
+      </div>
     </div>
     <div id="readTab" class="memo-content active">
-      <p class="read-info">문장 위에 마우스를 올리면 한국어 번역이 보여요.</p>
+      <p class="read-info" id="readInfoText">문장 위에 마우스를 올리면 한국어 번역이 보여요. · 드래그로 구간을 선택해 메모를 남길 수 있어요.</p>
       <div class="read-view" id="readView"></div>
     </div>
     <div id="writeTab" class="memo-content">
@@ -436,6 +548,19 @@
         <button class="btn btn-dark" onclick="submitWrite()"><i class="ti ti-send"></i>채점하기</button>
       </div>
       <div id="resultArea"></div>
+    </div>
+    <div id="blankTab" class="memo-content">
+      <div class="write-info">
+        <i class="ti ti-puzzle" style="font-size:14px;vertical-align:-2px;margin-right:4px"></i>
+        빈칸을 채워보세요. 단어를 클릭하면 빈칸이 됩니다. 총 <strong id="blankSentTotal">0</strong>문장입니다.
+        <div style="margin-top:6px;display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn btn-sky" onclick="autoBlankRandom()"><i class="ti ti-dice"></i>랜덤 빈칸</button>
+          <button class="btn" onclick="resetBlanks()"><i class="ti ti-refresh"></i>초기화</button>
+          <button class="btn btn-dark" onclick="checkBlanks()"><i class="ti ti-send"></i>채점하기</button>
+        </div>
+      </div>
+      <div class="write-area" id="blankArea"></div>
+      <div id="blankResultArea"></div>
     </div>
   </div>
 
@@ -455,6 +580,29 @@
 </div>
 
 <div class="toast" id="toast"></div>
+
+<!-- 하이라이트 툴바 -->
+<div class="hl-toolbar hidden" id="hlToolbar">
+  <div class="hl-color-btn" style="background:#ffe066" onclick="applyHighlight('hl-yellow')" title="노란색"></div>
+  <div class="hl-color-btn" style="background:#b6f5c8" onclick="applyHighlight('hl-green')" title="초록색"></div>
+  <div class="hl-color-btn" style="background:#bae0ff" onclick="applyHighlight('hl-blue')" title="파란색"></div>
+  <div class="hl-color-btn" style="background:#fbc8e0" onclick="applyHighlight('hl-pink')" title="분홍색"></div>
+  <div class="hl-sep"></div>
+  <button class="hl-memo-btn" onclick="openMemoInput()"><i class="ti ti-note" style="font-size:12px"></i>메모</button>
+  <button class="hl-erase-btn" onclick="eraseHighlight()">지우기</button>
+</div>
+
+<!-- 메모 입력 팝업 -->
+<div class="memo-input-popup hidden" id="memoInputPopup">
+  <textarea id="memoTextInput" placeholder="이 구간에 메모를 입력하세요..." rows="3"></textarea>
+  <div class="popup-actions">
+    <button class="btn" onclick="closeMemoInput()">취소</button>
+    <button class="btn btn-dark" onclick="saveMemoInput()">저장</button>
+  </div>
+</div>
+
+<!-- 메모 툴팁 -->
+<div class="memo-tooltip hidden" id="memoTooltip"></div>
 
 <script>
 const LS_DOCS = 'english_memo_docs';
@@ -618,7 +766,9 @@ function renderHome() {
   [...filtered].reverse().forEach(d => {
     const n = parseSentences(d.body).length;
     const folder = d.folderId ? folders.find(f => f.id === d.folderId) : null;
-    html += `<div class="doc-card" onclick="openDoc('${d.id}')">
+    html += `<div class="doc-card" data-doc-id="${d.id}" draggable="true"
+      ondragstart="onDocDragStart(event,'${d.id}')" ondragend="onDocDragEnd(event)"
+      onclick="openDoc('${d.id}')">
       <button class="doc-card-del" onclick="event.stopPropagation();deleteDoc('${d.id}')" aria-label="삭제"><i class="ti ti-x"></i></button>
       <div class="doc-card-title">${esc(d.title || '제목 없음')}</div>
       <div class="doc-card-preview">${esc(d.body.slice(0, 90))}</div>
@@ -772,7 +922,7 @@ function goMemorize() {
   saveData();
   if (!doc.body) { toast('본문을 먼저 입력해주세요.'); return; }
   document.getElementById('memoTitle').textContent = doc.title;
-  renderReadTab(doc); renderWriteTab(doc); switchTab('read');
+  renderReadTab(doc); renderWriteTab(doc); renderBlankTab(doc); switchTab('read');
   showScreen('memorizeScreen');
 }
 
@@ -780,13 +930,39 @@ function renderReadTab(doc) {
   const sents = parseSentences(doc.body);
   const krs = doc.translation ? parseSentences(doc.translation) : [];
   document.getElementById('readView').innerHTML = sents.map((s, i) => `
-    <div class="read-row">
+    <div class="read-row" data-sent-idx="${i}">
       <span class="read-num">${i+1}</span>
       <div class="read-text">
-        <div class="read-en">${esc(s)}</div>
-        ${krs[i] ? `<div class="read-kr">${esc(krs[i])}</div>` : ''}
+        <div class="read-en" id="readEn_${i}">${buildReadEnHtml(s, i, doc)}</div>
+        ${krs[i] ? `<div class="read-kr" id="readKr_${i}">${esc(krs[i])}</div>` : ''}
       </div>
     </div>`).join('');
+}
+
+function buildReadEnHtml(sentence, sentIdx, doc) {
+  // Apply saved highlights and memos
+  const annotations = (doc.annotations || []).filter(a => a.sentIdx === sentIdx);
+  if (!annotations.length) return esc(sentence);
+  // Build annotated HTML character by character
+  let result = '';
+  const chars = [...sentence];
+  let i = 0;
+  while (i < chars.length) {
+    const ann = annotations.find(a => a.start === i);
+    if (ann) {
+      const chunk = esc(sentence.slice(ann.start, ann.end));
+      if (ann.memo) {
+        result += `<span class="${ann.hlClass || ''} memo-span" data-ann-id="${ann.id}" onmouseenter="showMemoTooltip(event,'${esc(ann.memo).replace(/'/g,"&#39;")}')" onmouseleave="hideMemoTooltip()">${chunk}</span>`;
+      } else {
+        result += `<span class="${ann.hlClass || ''}" data-ann-id="${ann.id}">${chunk}</span>`;
+      }
+      i = ann.end;
+    } else {
+      result += esc(chars[i]);
+      i++;
+    }
+  }
+  return result;
 }
 
 function renderWriteTab(doc) {
@@ -804,10 +980,10 @@ function renderWriteTab(doc) {
 function autoResize(el) { el.style.height = 'auto'; el.style.height = el.scrollHeight + 'px'; }
 
 function switchTab(tab) {
-  document.getElementById('tabRead').classList.toggle('active', tab === 'read');
-  document.getElementById('tabWrite').classList.toggle('active', tab === 'write');
-  document.getElementById('readTab').classList.toggle('active', tab === 'read');
-  document.getElementById('writeTab').classList.toggle('active', tab === 'write');
+  ['read','write','blank'].forEach(t => {
+    document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1))?.classList.toggle('active', t === tab);
+    document.getElementById(t + 'Tab')?.classList.toggle('active', t === tab);
+  });
 }
 
 function resetWrite() {
@@ -891,7 +1067,297 @@ function toast(msg) {
   toastTimer = setTimeout(() => el.classList.remove('show'), 2000);
 }
 
-// ── DRAG & DROP ──
+
+// ── KR TOGGLE ──
+let krAlways = false;
+function toggleKrVisible() {
+  krAlways = !krAlways;
+  document.getElementById('readView').classList.toggle('kr-always', krAlways);
+  document.getElementById('krToggleLabel').textContent = krAlways ? '번역 숨기기' : '번역 항상 보기';
+  document.getElementById('krToggleBtn').classList.toggle('btn-sky', krAlways);
+}
+
+// ── HIGHLIGHT & MEMO ──
+let hlSelection = null; // { sentIdx, start, end, text }
+let pendingMemoAnnId = null;
+
+document.addEventListener('mouseup', onTextMouseUp);
+
+function onTextMouseUp(e) {
+  // ignore clicks inside toolbar/popup
+  if (e.target.closest('#hlToolbar') || e.target.closest('#memoInputPopup')) return;
+
+  const sel = window.getSelection();
+  if (!sel || sel.isCollapsed) {
+    hideHlToolbar();
+    return;
+  }
+
+  // Find which read-en div the selection is in
+  const anchor = sel.anchorNode;
+  const focus = sel.focusNode;
+  const readEnEl = findReadEnParent(anchor);
+  if (!readEnEl) { hideHlToolbar(); return; }
+
+  const sentIdx = parseInt(readEnEl.id.replace('readEn_', ''));
+  const doc = docs.find(d => d.id === currentId);
+  if (!doc) { hideHlToolbar(); return; }
+
+  // Get text offsets within the plain sentence
+  const sents = parseSentences(doc.body);
+  const sentence = sents[sentIdx] || '';
+
+  // Use a temporary range to get offsets against the plain sentence text
+  const range = sel.getRangeAt(0);
+  const startOff = getTextOffset(readEnEl, range.startContainer, range.startOffset);
+  const endOff   = getTextOffset(readEnEl, range.endContainer, range.endOffset);
+  const start = Math.min(startOff, endOff);
+  const end   = Math.max(startOff, endOff);
+  if (start === end) { hideHlToolbar(); return; }
+
+  hlSelection = { sentIdx, start, end, text: sentence.slice(start, end) };
+
+  // Position toolbar near selection
+  const rect = range.getBoundingClientRect();
+  showHlToolbar(rect.left + rect.width / 2, rect.bottom + window.scrollY + 6);
+}
+
+function findReadEnParent(node) {
+  let cur = node;
+  while (cur && cur !== document.body) {
+    if (cur.classList && cur.classList.contains('read-en')) return cur;
+    cur = cur.parentElement;
+  }
+  return null;
+}
+
+function getTextOffset(root, targetNode, targetOffset) {
+  // Walk text nodes of root and find character offset
+  let offset = 0;
+  const iter = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  let node;
+  while ((node = iter.nextNode())) {
+    if (node === targetNode) return offset + targetOffset;
+    offset += node.textContent.length;
+  }
+  return offset;
+}
+
+function showHlToolbar(x, y) {
+  const tb = document.getElementById('hlToolbar');
+  tb.classList.remove('hidden');
+  const tbW = 240;
+  const left = Math.min(Math.max(x - tbW/2, 8), window.innerWidth - tbW - 8);
+  tb.style.left = left + 'px';
+  tb.style.top  = (y + window.scrollY) + 'px';
+  // re-position to be viewport-relative
+  tb.style.position = 'absolute';
+}
+
+function hideHlToolbar() {
+  document.getElementById('hlToolbar').classList.add('hidden');
+  hlSelection = null;
+}
+
+function applyHighlight(hlClass) {
+  if (!hlSelection) return;
+  const doc = docs.find(d => d.id === currentId);
+  if (!doc) return;
+  if (!doc.annotations) doc.annotations = [];
+  // Remove overlapping annotations for this sentence
+  doc.annotations = doc.annotations.filter(a =>
+    !(a.sentIdx === hlSelection.sentIdx && a.start < hlSelection.end && a.end > hlSelection.start)
+  );
+  doc.annotations.push({ id: uid(), sentIdx: hlSelection.sentIdx, start: hlSelection.start, end: hlSelection.end, hlClass, memo: '' });
+  saveData();
+  renderReadTab(doc);
+  window.getSelection()?.removeAllRanges();
+  hideHlToolbar();
+}
+
+function eraseHighlight() {
+  if (!hlSelection) return;
+  const doc = docs.find(d => d.id === currentId);
+  if (!doc || !doc.annotations) { hideHlToolbar(); return; }
+  doc.annotations = doc.annotations.filter(a =>
+    !(a.sentIdx === hlSelection.sentIdx && a.start < hlSelection.end && a.end > hlSelection.start)
+  );
+  saveData();
+  renderReadTab(doc);
+  window.getSelection()?.removeAllRanges();
+  hideHlToolbar();
+}
+
+function openMemoInput() {
+  if (!hlSelection) return;
+  const doc = docs.find(d => d.id === currentId);
+  if (!doc) return;
+  if (!doc.annotations) doc.annotations = [];
+  // Create/find annotation for this range
+  let ann = doc.annotations.find(a => a.sentIdx === hlSelection.sentIdx && a.start === hlSelection.start && a.end === hlSelection.end);
+  if (!ann) {
+    ann = { id: uid(), sentIdx: hlSelection.sentIdx, start: hlSelection.start, end: hlSelection.end, hlClass: 'hl-blue', memo: '' };
+    doc.annotations = doc.annotations.filter(a =>
+      !(a.sentIdx === hlSelection.sentIdx && a.start < hlSelection.end && a.end > hlSelection.start)
+    );
+    doc.annotations.push(ann);
+  }
+  pendingMemoAnnId = ann.id;
+  document.getElementById('memoTextInput').value = ann.memo || '';
+
+  const tb = document.getElementById('hlToolbar');
+  const tbRect = tb.getBoundingClientRect();
+  const popup = document.getElementById('memoInputPopup');
+  popup.classList.remove('hidden');
+  popup.style.position = 'absolute';
+  popup.style.left = tbRect.left + 'px';
+  popup.style.top = (tbRect.bottom + window.scrollY + 6) + 'px';
+  setTimeout(() => document.getElementById('memoTextInput').focus(), 50);
+  hideHlToolbar();
+}
+
+function closeMemoInput() {
+  document.getElementById('memoInputPopup').classList.add('hidden');
+  pendingMemoAnnId = null;
+}
+
+function saveMemoInput() {
+  const doc = docs.find(d => d.id === currentId);
+  if (!doc || !pendingMemoAnnId) { closeMemoInput(); return; }
+  const ann = (doc.annotations || []).find(a => a.id === pendingMemoAnnId);
+  if (ann) {
+    ann.memo = document.getElementById('memoTextInput').value.trim();
+    if (!ann.hlClass) ann.hlClass = 'hl-blue';
+  }
+  saveData();
+  renderReadTab(doc);
+  closeMemoInput();
+  window.getSelection()?.removeAllRanges();
+  toast('메모를 저장했어요 ✓');
+}
+
+function showMemoTooltip(e, memoText) {
+  const el = document.getElementById('memoTooltip');
+  el.textContent = memoText.replace(/&#39;/g, "'");
+  el.classList.remove('hidden');
+  el.style.position = 'fixed';
+  el.style.left = Math.min(e.clientX + 12, window.innerWidth - 280) + 'px';
+  el.style.top  = (e.clientY - 36) + 'px';
+}
+function hideMemoTooltip() {
+  document.getElementById('memoTooltip').classList.add('hidden');
+}
+
+// ── BLANK TAB ──
+let blankState = {}; // { sentIdx: Set<wordIdx> }
+
+function renderBlankTab(doc) {
+  const sents = parseSentences(doc.body);
+  document.getElementById('blankSentTotal').textContent = sents.length;
+  blankState = {};
+  document.getElementById('blankArea').innerHTML = sents.map((s, i) => {
+    blankState[i] = new Set();
+    const words = tokenizeWords(s);
+    const wordSpans = words.map((w, wi) => {
+      if (/^\s+$/.test(w)) return w;
+      return `<span class="blank-word" data-si="${i}" data-wi="${wi}" onclick="toggleBlank(${i},${wi})">${esc(w)}</span>`;
+    }).join('');
+    return `<div class="blank-sent-row">
+      <div class="blank-sent-label">문장 ${i+1}</div>
+      <div class="blank-sent-text" id="blankSent_${i}">${wordSpans}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('blankResultArea').innerHTML = '';
+}
+
+function tokenizeWords(s) {
+  // Split into word tokens and space tokens
+  return s.split(/(\s+)/);
+}
+
+function toggleBlank(si, wi) {
+  const doc = docs.find(d => d.id === currentId);
+  if (!doc) return;
+  const sents = parseSentences(doc.body);
+  const s = sents[si];
+  const words = tokenizeWords(s);
+  const token = words.filter((w,i) => !/^\s+$/.test(w))[wi] || '';
+
+  const container = document.getElementById('blankSent_' + si);
+  // Find actual span
+  const spans = [...container.querySelectorAll('.blank-word')];
+  const span = spans.find(sp => parseInt(sp.dataset.wi) === wi);
+  if (!span) return;
+
+  if (span.classList.contains('blanked')) {
+    // Unblank
+    span.classList.remove('blanked','correct-blank','wrong-blank');
+    span.innerHTML = esc(token);
+    span.onclick = () => toggleBlank(si, wi);
+  } else {
+    // Blank it
+    span.classList.add('blanked');
+    const w = Math.max(token.length * 0.65, 2.5).toFixed(1);
+    span.innerHTML = `<input type="text" style="width:${w}em" placeholder="?" spellcheck="false" onclick="event.stopPropagation()">`;
+    span.onclick = null;
+  }
+}
+
+function autoBlankRandom() {
+  const doc = docs.find(d => d.id === currentId);
+  if (!doc) return;
+  renderBlankTab(doc);
+  const sents = parseSentences(doc.body);
+  sents.forEach((s, si) => {
+    const container = document.getElementById('blankSent_' + si);
+    const spans = [...container.querySelectorAll('.blank-word')];
+    const content = spans.filter(sp => sp.textContent.trim().length > 2);
+    const numBlanks = Math.max(1, Math.floor(content.length * 0.3));
+    const shuffled = content.sort(() => Math.random() - 0.5).slice(0, numBlanks);
+    shuffled.forEach(sp => toggleBlank(parseInt(sp.dataset.si), parseInt(sp.dataset.wi)));
+  });
+}
+
+function resetBlanks() {
+  const doc = docs.find(d => d.id === currentId);
+  if (doc) renderBlankTab(doc);
+}
+
+function checkBlanks() {
+  const doc = docs.find(d => d.id === currentId);
+  if (!doc) return;
+  const sents = parseSentences(doc.body);
+  let correct = 0, total = 0;
+  sents.forEach((s, si) => {
+    const container = document.getElementById('blankSent_' + si);
+    const spans = [...container.querySelectorAll('.blank-word.blanked')];
+    const words = tokenizeWords(s);
+    spans.forEach(sp => {
+      const wi = parseInt(sp.dataset.wi);
+      const realWords = words.filter(w => !/^\s+$/.test(w));
+      const orig = (realWords[wi] || '').toLowerCase().replace(/[^a-z0-9가-힣]/g,'');
+      const inp = (sp.querySelector('input')?.value || '').trim().toLowerCase().replace(/[^a-z0-9가-힣]/g,'');
+      total++;
+      if (inp === orig) { sp.classList.add('correct-blank'); correct++; }
+      else sp.classList.add('wrong-blank');
+    });
+  });
+  if (total === 0) { toast('먼저 단어를 클릭해 빈칸을 만들어보세요.'); return; }
+  const pct = Math.round(correct/total*100);
+  const emoji = pct === 100 ? '🎉' : pct >= 70 ? '👍' : '💪';
+  document.getElementById('blankResultArea').innerHTML = `
+    <div class="result-summary" style="margin-top:16px">
+      <div>
+        <div class="result-score-big">${pct}<span style="font-size:16px;font-weight:400">%</span></div>
+        <div class="result-score-label">${correct}/${total} 정답</div>
+      </div>
+      <div style="font-size:22px">${emoji}</div>
+      <div class="result-msg">${pct===100?'모두 맞았어요!':pct>=70?'거의 다 맞았어요!':'조금 더 연습해봐요.'}</div>
+    </div>`;
+  document.getElementById('blankResultArea').scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+
 let dragDocId = null;
 
 function onDocDragStart(e, docId) {
@@ -903,7 +1369,7 @@ function onDocDragStart(e, docId) {
     if (el) el.classList.add('dragging');
   }, 0);
   // show hint & folder targets
-  document.getElementById('dragHint').classList.remove('visible');
+  document.getElementById('dragHint').classList.add('visible');
   document.querySelectorAll('.folder-card').forEach(fc => fc.setAttribute('data-drop-target','true'));
 }
 
