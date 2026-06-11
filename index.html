@@ -949,7 +949,7 @@ function buildReadEnHtml(sentence, sentIdx, doc) {
   let i = 0;
   while (i < chars.length) {
     const ann = annotations.find(a => a.start === i);
-    if (ann) {
+    if (ann && ann.end > i) {
       const chunk = esc(sentence.slice(ann.start, ann.end));
       if (ann.memo) {
         result += `<span class="${ann.hlClass || ''} memo-span" data-ann-id="${ann.id}" onmouseenter="showMemoTooltip(event,'${esc(ann.memo).replace(/'/g,"&#39;")}')" onmouseleave="hideMemoTooltip()">${chunk}</span>`;
@@ -1084,6 +1084,13 @@ let pendingMemoAnnId = null;
 document.addEventListener('mouseup', onTextMouseUp);
 
 function onTextMouseUp(e) {
+  // 암기 모드(원문 보기)에서만 동작
+  const memorizeScreen = document.getElementById('memorizeScreen');
+  if (!memorizeScreen || !memorizeScreen.classList.contains('active')) {
+    hideHlToolbar();
+    return;
+  }
+
   // ignore clicks inside toolbar/popup
   if (e.target.closest('#hlToolbar') || e.target.closest('#memoInputPopup')) return;
 
@@ -1095,7 +1102,6 @@ function onTextMouseUp(e) {
 
   // Find which read-en div the selection is in
   const anchor = sel.anchorNode;
-  const focus = sel.focusNode;
   const readEnEl = findReadEnParent(anchor);
   if (!readEnEl) { hideHlToolbar(); return; }
 
@@ -1103,21 +1109,19 @@ function onTextMouseUp(e) {
   const doc = docs.find(d => d.id === currentId);
   if (!doc) { hideHlToolbar(); return; }
 
-  // Get text offsets within the plain sentence
   const sents = parseSentences(doc.body);
   const sentence = sents[sentIdx] || '';
+  if (!sentence) { hideHlToolbar(); return; }
 
-  // Use a temporary range to get offsets against the plain sentence text
   const range = sel.getRangeAt(0);
   const startOff = getTextOffset(readEnEl, range.startContainer, range.startOffset);
   const endOff   = getTextOffset(readEnEl, range.endContainer, range.endOffset);
   const start = Math.min(startOff, endOff);
   const end   = Math.max(startOff, endOff);
-  if (start === end) { hideHlToolbar(); return; }
+  if (start >= end) { hideHlToolbar(); return; }
 
   hlSelection = { sentIdx, start, end, text: sentence.slice(start, end) };
 
-  // Position toolbar near selection
   const rect = range.getBoundingClientRect();
   showHlToolbar(rect.left + rect.width / 2, rect.bottom + window.scrollY + 6);
 }
@@ -1132,7 +1136,6 @@ function findReadEnParent(node) {
 }
 
 function getTextOffset(root, targetNode, targetOffset) {
-  // Walk text nodes of root and find character offset
   let offset = 0;
   const iter = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
   let node;
@@ -1140,6 +1143,7 @@ function getTextOffset(root, targetNode, targetOffset) {
     if (node === targetNode) return offset + targetOffset;
     offset += node.textContent.length;
   }
+  // fallback: targetNode not found
   return offset;
 }
 
