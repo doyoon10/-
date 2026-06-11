@@ -681,6 +681,10 @@ document.getElementById('folderModal').addEventListener('click', function(e) {
   if (e.target === this) closeFolderModal();
 });
 
+// ── INIT ──
+loadData();
+renderHome();
+
 function deleteFolder(id) {
   if (!confirm('폴더를 삭제할까요? 안에 있는 문서는 미분류로 이동됩니다.')) return;
   folders = folders.filter(f => f.id !== id);
