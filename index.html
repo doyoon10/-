@@ -940,7 +940,7 @@ async function translateDoc() {
     box.textContent = translated;
     box.classList.remove('loading');
     const doc = docs.find(d => d.id === currentId);
-    if (doc) { doc.translation = translated; saveData(); }
+    if (doc) { doc.translation = translated; doc.translationArr = results; saveData(); }
   } catch(e) {
     box.textContent = '번역 중 오류가 발생했어요.';
     box.classList.remove('loading');
@@ -964,15 +964,17 @@ function goMemorize() {
 
 function renderReadTab(doc) {
   const sents = parseSentences(doc.body);
-  const krs = doc.translation ? parseSentences(doc.translation) : [];
+  const krs = doc.translationArr || (doc.translation ? parseSentences(doc.translation) : []);
+  // ensure array length matches sentences
+  const krsFull = sents.map((_, i) => krs[i] || '');
   document.getElementById('readView').innerHTML = sents.map((s, i) => `
     <div class="read-row" data-sent-idx="${i}">
       <span class="read-num">${i+1}</span>
       <div class="read-text">
         <div class="read-en" id="readEn_${i}">${buildReadEnHtml(s, i, doc)}</div>
         <div class="read-kr-wrap">
-          ${krs[i]
-            ? `<div class="read-kr editable-kr" id="readKr_${i}" onclick="editKr(${i})">${esc(krs[i])}</div>`
+          ${krsFull[i]
+            ? `<div class="read-kr editable-kr" id="readKr_${i}" onclick="editKr(${i})">${esc(krsFull[i])}</div>`
             : `<div class="read-kr editable-kr read-kr-empty" id="readKr_${i}" onclick="editKr(${i})">번역 없음</div>`
           }
           <button class="kr-edit-btn" onclick="editKr(${i})" title="번역 수정"><i class="ti ti-pencil"></i></button>
@@ -984,8 +986,9 @@ function renderReadTab(doc) {
 function editKr(idx) {
   const doc = docs.find(d => d.id === currentId);
   if (!doc) return;
-  const krs = doc.translation ? parseSentences(doc.translation) : [];
-  const current = krs[idx] || '';
+  const sents = parseSentences(doc.body);
+  if (!doc.translationArr) doc.translationArr = sents.map((_, i) => (doc.translation ? parseSentences(doc.translation)[i] : '') || '');
+  const current = doc.translationArr[idx] || '';
   const el = document.getElementById('readKr_' + idx);
   if (!el || el.querySelector('textarea')) return;
 
@@ -1009,17 +1012,15 @@ function saveKr(idx) {
   const doc = docs.find(d => d.id === currentId);
   if (!doc) return;
   const sents = parseSentences(doc.body);
-  const krs = doc.translation ? parseSentences(doc.translation) : [];
-  // fill gaps
-  while (krs.length < sents.length) krs.push('');
+  if (!doc.translationArr) doc.translationArr = sents.map(() => '');
+  while (doc.translationArr.length < sents.length) doc.translationArr.push('');
   const newVal = (document.getElementById('krEditInput_' + idx)?.value || '').trim();
-  krs[idx] = newVal;
-  doc.translation = krs.join(' ');
+  doc.translationArr[idx] = newVal;
+  doc.translation = doc.translationArr.join(' ');
   saveData();
+  const wasKrAlways = krAlways;
   renderReadTab(doc);
-  if (document.getElementById('readView').classList.contains('kr-always')) {
-    document.getElementById('readView').classList.add('kr-always');
-  }
+  if (wasKrAlways) document.getElementById('readView').classList.add('kr-always');
   toast('번역을 수정했어요 ✓');
 }
 
