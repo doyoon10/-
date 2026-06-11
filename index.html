@@ -61,388 +61,317 @@
   .screen { display: none; }
   .screen.active { display: block; }
 
-  /* ── TOP BAR ── */
-  .topbar {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 32px;
-  }
-  .topbar-logo {
-    font-size: 19px;
-    font-weight: 600;
-    letter-spacing: -0.4px;
-    color: var(--text);
-  }
+  /* TOP BAR */
+  .topbar { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; }
+  .topbar-logo { font-size: 19px; font-weight: 600; letter-spacing: -0.4px; color: var(--text); }
   .topbar-logo span { color: var(--text2); font-weight: 400; }
   .back-btn {
-    background: none;
-    border: 0.5px solid var(--border-md);
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    color: var(--text2);
-    font-size: 16px;
-    padding: 6px 8px;
-    display: flex;
-    align-items: center;
-    transition: all 0.15s;
+    background: none; border: 0.5px solid var(--border-md);
+    border-radius: var(--radius-sm); cursor: pointer; color: var(--text2);
+    font-size: 16px; padding: 6px 8px; display: flex; align-items: center; transition: all 0.15s;
   }
   .back-btn:hover { background: var(--surface2); color: var(--text); }
   .topbar-title { font-size: 17px; font-weight: 500; }
+  .topbar-breadcrumb { font-size: 13px; color: var(--text3); display: flex; align-items: center; gap: 6px; }
+  .topbar-breadcrumb .sep { color: var(--text3); }
+  .topbar-breadcrumb .crumb { cursor: pointer; color: var(--text2); }
+  .topbar-breadcrumb .crumb:hover { color: var(--text); text-decoration: underline; }
 
-  /* ── BUTTONS ── */
+  /* BUTTONS */
   .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 7px 14px;
-    border-radius: var(--radius-sm);
-    border: 0.5px solid var(--border-md);
-    background: var(--surface);
-    color: var(--text2);
-    font-size: 13px;
-    cursor: pointer;
-    transition: all 0.15s;
-    white-space: nowrap;
-    font-family: inherit;
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 14px; border-radius: var(--radius-sm);
+    border: 0.5px solid var(--border-md); background: var(--surface);
+    color: var(--text2); font-size: 13px; cursor: pointer;
+    transition: all 0.15s; white-space: nowrap; font-family: inherit;
   }
   .btn:hover { background: var(--surface2); color: var(--text); }
   .btn i { font-size: 15px; }
-  .btn-dark {
-    background: var(--text);
-    color: var(--bg);
-    border-color: var(--text);
-  }
+  .btn-dark { background: var(--text); color: var(--bg); border-color: var(--text); }
   .btn-dark:hover { opacity: 0.85; color: var(--bg); }
-  .btn-sky {
-    background: var(--sky);
-    color: var(--sky-text);
-    border-color: var(--sky-border);
-  }
+  .btn-sky { background: var(--sky); color: var(--sky-text); border-color: var(--sky-border); }
   .btn-sky:hover { opacity: 0.85; }
   .btn-danger { color: var(--red); border-color: var(--red); }
   .btn-danger:hover { background: var(--red-bg); }
 
-  /* ── PILL TAG ── */
-  .pill {
-    display: inline-block;
-    font-size: 11px;
-    font-weight: 500;
-    padding: 2px 8px;
-    border-radius: 20px;
-    background: var(--surface2);
-    color: var(--text2);
-    border: 0.5px solid var(--border);
-  }
+  /* PILL */
+  .pill { display: inline-block; font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 20px; background: var(--surface2); color: var(--text2); border: 0.5px solid var(--border); }
   .pill-sky { background: var(--sky); color: var(--sky-text); border-color: var(--sky-border); }
   .pill-green { background: var(--green); color: var(--green-text); border-color: transparent; }
 
-  /* ── HOME ── */
-  .section-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 16px;
-  }
-  .section-header h2 { font-size: 13px; font-weight: 500; color: var(--text2); letter-spacing: 0.3px; text-transform: uppercase; }
+  /* SECTION HEADER */
+  .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; margin-top: 28px; }
+  .section-header:first-child { margin-top: 0; }
+  .section-header h2 { font-size: 12px; font-weight: 500; color: var(--text3); letter-spacing: 0.5px; text-transform: uppercase; display: flex; align-items: center; gap: 6px; }
+  .section-header h2 i { font-size: 14px; }
+  .section-actions { display: flex; gap: 8px; }
 
+  /* FOLDER GRID */
+  .folder-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin-bottom: 8px; }
+  .folder-card {
+    background: var(--surface); border: 0.5px solid var(--border);
+    border-radius: var(--radius); padding: 14px 16px;
+    cursor: pointer; transition: border-color 0.15s, box-shadow 0.15s;
+    display: flex; align-items: center; gap: 10px; position: relative;
+  }
+  .folder-card:hover { border-color: var(--border-md); box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+  .folder-card.active-folder { border-color: var(--sky-border); background: var(--sky); }
+  .folder-icon { font-size: 18px; color: var(--text2); flex-shrink: 0; }
+  .folder-card.active-folder .folder-icon { color: var(--sky-text); }
+  .folder-info { flex: 1; min-width: 0; }
+  .folder-name { font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .folder-count { font-size: 11px; color: var(--text3); margin-top: 2px; }
+  .folder-card.active-folder .folder-count { color: var(--sky-text); opacity: 0.8; }
+  .folder-del {
+    position: absolute; top: 6px; right: 6px;
+    background: none; border: none; cursor: pointer;
+    color: var(--text3); font-size: 13px; padding: 3px;
+    border-radius: 4px; display: none;
+  }
+  .folder-card:hover .folder-del { display: flex; align-items: center; }
+  .folder-del:hover { color: var(--red); }
+
+  /* DOC GRID */
   .doc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
   .doc-card {
-    background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: var(--radius);
-    padding: 18px;
-    cursor: pointer;
-    transition: border-color 0.15s, box-shadow 0.15s;
-    position: relative;
+    background: var(--surface); border: 0.5px solid var(--border);
+    border-radius: var(--radius); padding: 18px; cursor: pointer;
+    transition: border-color 0.15s, box-shadow 0.15s; position: relative;
   }
   .doc-card:hover { border-color: var(--border-md); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
   .doc-card-title { font-size: 14px; font-weight: 500; margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .doc-card-preview { font-size: 12px; color: var(--text3); line-height: 1.65; height: 40px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; margin-bottom: 12px; }
-  .doc-card-meta { display: flex; gap: 6px; align-items: center; }
+  .doc-card-meta { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
   .doc-card-del {
-    position: absolute;
-    top: 10px; right: 10px;
+    position: absolute; top: 10px; right: 10px;
     background: none; border: none; cursor: pointer;
     color: var(--text3); font-size: 14px; padding: 4px;
-    border-radius: 4px; display: none;
-    transition: color 0.15s;
+    border-radius: 4px; display: none; transition: color 0.15s;
   }
   .doc-card:hover .doc-card-del { display: flex; align-items: center; }
   .doc-card-del:hover { color: var(--red); }
 
   .new-card {
-    border: 1.5px dashed var(--border-md);
-    background: transparent;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    min-height: 120px;
-    color: var(--text3);
+    border: 1.5px dashed var(--border-md); background: transparent;
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; gap: 8px; min-height: 120px; color: var(--text3);
   }
   .new-card:hover { border-color: var(--text2); color: var(--text2); background: var(--surface2); }
   .new-card i { font-size: 22px; }
   .new-card span { font-size: 13px; }
 
-  /* ── EDITOR ── */
+  /* FILTER BAR */
+  .filter-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+  .filter-chip {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 500;
+    border: 0.5px solid var(--border-md); background: var(--surface);
+    color: var(--text2); cursor: pointer; transition: all 0.15s;
+  }
+  .filter-chip:hover { background: var(--surface2); color: var(--text); }
+  .filter-chip.active { background: var(--text); color: var(--bg); border-color: var(--text); }
+  .filter-chip i { font-size: 13px; }
+
+  /* MODAL */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.35);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 100; padding: 20px;
+  }
+  .modal-overlay.hidden { display: none; }
+  .modal {
+    background: var(--surface); border-radius: var(--radius);
+    border: 0.5px solid var(--border-md); padding: 24px;
+    width: 100%; max-width: 380px; box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  }
+  .modal h3 { font-size: 16px; font-weight: 600; margin-bottom: 16px; }
+  .modal-input {
+    width: 100%; padding: 9px 13px; border: 0.5px solid var(--border-md);
+    border-radius: var(--radius-sm); font-size: 14px; font-family: inherit;
+    background: var(--surface2); color: var(--text); outline: none; margin-bottom: 16px;
+  }
+  .modal-input:focus { border-color: var(--border-md); background: var(--surface); }
+  .modal-actions { display: flex; justify-content: flex-end; gap: 8px; }
+
+  /* EDITOR */
   .editor-layout { display: flex; flex-direction: column; gap: 14px; }
   .title-input {
-    width: 100%;
-    font-size: 24px;
-    font-weight: 600;
-    letter-spacing: -0.4px;
-    border: none;
-    outline: none;
-    background: transparent;
-    color: var(--text);
-    padding: 0 0 10px;
-    border-bottom: 1.5px solid var(--border);
-    font-family: inherit;
-    transition: border-color 0.15s;
+    width: 100%; font-size: 24px; font-weight: 600; letter-spacing: -0.4px;
+    border: none; outline: none; background: transparent; color: var(--text);
+    padding: 0 0 10px; border-bottom: 1.5px solid var(--border); font-family: inherit; transition: border-color 0.15s;
   }
   .title-input:focus { border-bottom-color: var(--border-md); }
   .title-input::placeholder { color: var(--text3); }
-
   .editor-toolbar { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
   .editor-toolbar .spacer { flex: 1; }
+  .folder-select {
+    padding: 7px 12px; border-radius: var(--radius-sm);
+    border: 0.5px solid var(--border-md); background: var(--surface);
+    color: var(--text2); font-size: 13px; cursor: pointer;
+    font-family: inherit; outline: none; transition: all 0.15s;
+  }
+  .folder-select:hover { background: var(--surface2); }
 
   .body-textarea {
-    width: 100%;
-    min-height: 280px;
-    padding: 18px;
-    border: 0.5px solid var(--border);
-    border-radius: var(--radius);
-    font-size: 15px;
-    line-height: 1.9;
-    resize: vertical;
-    background: var(--surface);
-    color: var(--text);
-    font-family: inherit;
-    outline: none;
-    transition: border-color 0.15s;
+    width: 100%; min-height: 280px; padding: 18px;
+    border: 0.5px solid var(--border); border-radius: var(--radius);
+    font-size: 15px; line-height: 1.9; resize: vertical;
+    background: var(--surface); color: var(--text); font-family: inherit;
+    outline: none; transition: border-color 0.15s;
   }
   .body-textarea:focus { border-color: var(--border-md); }
   .body-textarea::placeholder { color: var(--text3); }
-
   .editor-footer { display: flex; align-items: center; justify-content: space-between; }
   .sent-count { font-size: 12px; color: var(--text3); }
-
   .translation-wrap { margin-top: 4px; }
   .translation-label { font-size: 12px; font-weight: 500; color: var(--text2); margin-bottom: 6px; display: flex; align-items: center; gap: 5px; }
   .translation-box {
-    background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: var(--radius);
-    padding: 16px 18px;
-    font-size: 14px;
-    line-height: 1.85;
-    color: var(--text2);
+    background: var(--surface); border: 0.5px solid var(--border);
+    border-radius: var(--radius); padding: 16px 18px;
+    font-size: 14px; line-height: 1.85; color: var(--text2);
   }
   .translation-box.loading { opacity: 0.5; }
 
-  /* ── MEMO SCREEN ── */
+  /* MEMO */
   .memo-tabs {
-    display: flex;
-    gap: 0;
-    border: 0.5px solid var(--border-md);
-    border-radius: var(--radius-sm);
-    overflow: hidden;
-    width: fit-content;
-    margin-bottom: 22px;
+    display: flex; border: 0.5px solid var(--border-md);
+    border-radius: var(--radius-sm); overflow: hidden; width: fit-content; margin-bottom: 22px;
   }
   .memo-tab {
-    padding: 7px 20px;
-    font-size: 13px;
-    cursor: pointer;
-    background: var(--surface);
-    border: none;
-    color: var(--text2);
-    transition: all 0.15s;
-    font-family: inherit;
+    padding: 7px 20px; font-size: 13px; cursor: pointer;
+    background: var(--surface); border: none; color: var(--text2);
+    transition: all 0.15s; font-family: inherit;
   }
   .memo-tab.active { background: var(--text); color: var(--bg); }
   .memo-content { display: none; }
   .memo-content.active { display: block; }
-
-  /* READ TAB */
-  .read-info {
-    font-size: 12px;
-    color: var(--text3);
-    margin-bottom: 16px;
-  }
+  .read-info { font-size: 12px; color: var(--text3); margin-bottom: 16px; }
   .read-view { display: flex; flex-direction: column; gap: 4px; }
-  .read-row {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    padding: 10px 14px;
-    border-radius: var(--radius-sm);
-    transition: background 0.1s;
-    cursor: default;
-  }
+  .read-row { display: flex; gap: 12px; align-items: flex-start; padding: 10px 14px; border-radius: var(--radius-sm); transition: background 0.1s; cursor: default; }
   .read-row:hover { background: var(--surface2); }
   .read-num { font-size: 11px; color: var(--text3); min-width: 22px; padding-top: 3px; font-variant-numeric: tabular-nums; text-align: right; }
   .read-text { flex: 1; }
   .read-en { font-size: 14px; line-height: 1.8; }
   .read-kr { font-size: 12px; color: var(--text2); margin-top: 3px; display: none; }
   .read-row:hover .read-kr { display: block; }
-
-  /* WRITE TAB */
-  .write-info {
-    font-size: 12px;
-    color: var(--text2);
-    margin-bottom: 16px;
-    padding: 10px 14px;
-    background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: var(--radius-sm);
-    line-height: 1.65;
-  }
+  .write-info { font-size: 12px; color: var(--text2); margin-bottom: 16px; padding: 10px 14px; background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius-sm); line-height: 1.65; }
   .write-area { display: flex; flex-direction: column; gap: 8px; }
   .write-row { display: flex; gap: 10px; align-items: flex-start; }
   .write-num { font-size: 11px; color: var(--text3); min-width: 22px; padding-top: 11px; text-align: right; font-variant-numeric: tabular-nums; }
   .write-input {
-    flex: 1;
-    padding: 9px 13px;
-    border: 0.5px solid var(--border);
-    border-radius: var(--radius-sm);
-    font-size: 14px;
-    line-height: 1.75;
-    font-family: inherit;
-    background: var(--surface);
-    color: var(--text);
-    resize: none;
-    outline: none;
-    min-height: 44px;
-    overflow: hidden;
-    transition: border-color 0.15s;
+    flex: 1; padding: 9px 13px; border: 0.5px solid var(--border);
+    border-radius: var(--radius-sm); font-size: 14px; line-height: 1.75;
+    font-family: inherit; background: var(--surface); color: var(--text);
+    resize: none; outline: none; min-height: 44px; overflow: hidden; transition: border-color 0.15s;
   }
   .write-input:focus { border-color: var(--border-md); }
   .write-input::placeholder { color: var(--text3); }
-
   .write-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px; }
 
   /* RESULT */
-  .result-summary {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 16px 20px;
-    background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: var(--radius);
-    margin: 20px 0 14px;
-  }
+  .result-summary { display: flex; align-items: center; gap: 16px; padding: 16px 20px; background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); margin: 20px 0 14px; }
   .result-score-big { font-size: 28px; font-weight: 600; letter-spacing: -0.5px; }
   .result-score-label { font-size: 12px; color: var(--text2); margin-top: 1px; }
-  .result-emoji { font-size: 22px; }
   .result-msg { font-size: 14px; color: var(--text2); }
-
   .result-list { display: flex; flex-direction: column; gap: 10px; }
-  .result-item {
-    background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: var(--radius);
-    padding: 14px 18px;
-  }
+  .result-item { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 14px 18px; }
   .result-item-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
   .result-item-num { font-size: 11px; color: var(--text3); }
   .result-original { font-size: 12px; color: var(--text2); margin-bottom: 6px; line-height: 1.7; padding: 6px 10px; background: var(--surface2); border-radius: var(--radius-sm); }
   .result-mine { font-size: 14px; line-height: 1.85; }
   .result-none { font-size: 13px; color: var(--text3); font-style: italic; }
-
   .char-ok { color: var(--text); }
   .char-err { color: var(--red); background: var(--red-bg); border-radius: 2px; padding: 0 1px; }
   .char-miss { color: var(--red); text-decoration: underline wavy; }
-
-  .score-pill {
-    display: inline-block;
-    font-size: 11px;
-    font-weight: 500;
-    padding: 2px 8px;
-    border-radius: 20px;
-  }
+  .score-pill { display: inline-block; font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 20px; }
   .score-perfect { background: var(--green); color: var(--green-text); }
   .score-good { background: var(--sky); color: var(--sky-text); }
   .score-bad { background: var(--red-bg); color: var(--red); }
 
-  /* ── EMPTY STATE ── */
-  .empty {
-    text-align: center;
-    padding: 64px 0;
-    color: var(--text3);
-  }
-  .empty i { font-size: 36px; display: block; margin-bottom: 12px; }
-  .empty p { font-size: 14px; }
+  /* EMPTY */
+  .empty { text-align: center; padding: 48px 0; color: var(--text3); }
+  .empty i { font-size: 32px; display: block; margin-bottom: 10px; }
+  .empty p { font-size: 13px; }
 
-  /* ── TOAST ── */
+  /* TOAST */
   .toast {
-    position: fixed;
-    bottom: 28px;
-    left: 50%;
+    position: fixed; bottom: 28px; left: 50%;
     transform: translateX(-50%) translateY(12px);
-    background: var(--text);
-    color: var(--bg);
-    font-size: 13px;
-    padding: 9px 18px;
-    border-radius: 20px;
-    opacity: 0;
-    transition: all 0.25s;
-    pointer-events: none;
-    white-space: nowrap;
-    z-index: 999;
+    background: var(--text); color: var(--bg); font-size: 13px;
+    padding: 9px 18px; border-radius: 20px; opacity: 0;
+    transition: all 0.25s; pointer-events: none; white-space: nowrap; z-index: 999;
   }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  .divider { height: 0.5px; background: var(--border); margin: 24px 0; }
 </style>
 </head>
 <body>
-
 <div class="app">
 
-  <!-- ════ HOME ════ -->
+  <!-- HOME -->
   <div id="homeScreen" class="screen active">
     <div class="topbar">
       <div class="topbar-logo">English Memo<span> — 영어 본문 암기</span></div>
     </div>
+
+    <!-- 폴더 섹션 -->
+    <div class="section-header" style="margin-top:0">
+      <h2><i class="ti ti-folder"></i>폴더</h2>
+      <div class="section-actions">
+        <button class="btn" onclick="openNewFolderModal()"><i class="ti ti-folder-plus"></i>새 폴더</button>
+      </div>
+    </div>
+    <div class="folder-grid" id="folderGrid"></div>
+
+    <div class="divider"></div>
+
+    <!-- 문서 섹션 -->
     <div class="section-header">
-      <h2>내 문서</h2>
-      <button class="btn btn-dark" onclick="openNewDoc()"><i class="ti ti-plus"></i>새 문서</button>
+      <h2><i class="ti ti-file-text"></i><span id="docSectionTitle">전체 문서</span></h2>
+      <div class="section-actions">
+        <button class="btn btn-dark" onclick="openNewDoc()"><i class="ti ti-plus"></i>새 문서</button>
+      </div>
+    </div>
+    <div class="filter-bar" id="filterBar" style="display:none">
+      <button class="filter-chip active" id="filterAll" onclick="setFilter('all')"><i class="ti ti-layout-grid"></i>전체</button>
+      <button class="filter-chip" id="filterFolder" onclick="setFilter('folder')"><i class="ti ti-folder"></i><span id="filterFolderName">폴더</span></button>
+      <button class="filter-chip" id="filterNone" onclick="setFilter('none')"><i class="ti ti-file"></i>미분류</button>
     </div>
     <div class="doc-grid" id="docGrid"></div>
   </div>
 
-  <!-- ════ EDITOR ════ -->
+  <!-- EDITOR -->
   <div id="editorScreen" class="screen">
     <div class="topbar">
       <button class="back-btn" onclick="goHome()" aria-label="홈으로"><i class="ti ti-arrow-left"></i></button>
-      <div class="topbar-title" id="editorTopTitle">새 문서</div>
+      <div class="topbar-breadcrumb">
+        <span class="crumb" onclick="goHome()">홈</span>
+        <span class="sep">›</span>
+        <span id="editorFolderCrumb" style="display:none"></span>
+        <span id="editorFolderSep" class="sep" style="display:none">›</span>
+        <span id="editorTopTitle">새 문서</span>
+      </div>
     </div>
     <div class="editor-layout">
       <input class="title-input" id="docTitleInput" placeholder="문서 제목" maxlength="60" oninput="onTitleInput()">
-
       <div class="editor-toolbar">
+        <select class="folder-select" id="folderSelect" onchange="onFolderSelectChange()">
+          <option value="">📁 폴더 없음</option>
+        </select>
         <button class="btn btn-sky" onclick="translateDoc()"><i class="ti ti-language"></i>한국어 번역</button>
         <button class="btn" onclick="goMemorize()"><i class="ti ti-brain"></i>암기 모드</button>
         <div class="spacer"></div>
         <button class="btn btn-danger" onclick="deleteCurrentDoc()"><i class="ti ti-trash"></i></button>
         <button class="btn btn-dark" onclick="saveDoc()"><i class="ti ti-device-floppy"></i>저장</button>
       </div>
-
-      <textarea
-        class="body-textarea"
-        id="bodyInput"
+      <textarea class="body-textarea" id="bodyInput"
         placeholder="여기에 영어 본문을 입력하세요.&#10;마침표(.), 느낌표(!), 물음표(?)로 문장을 구분합니다."
-        oninput="onBodyInput()"
-        spellcheck="false"
-      ></textarea>
-
+        oninput="onBodyInput()" spellcheck="false"></textarea>
       <div class="editor-footer">
         <span class="sent-count" id="sentCount">문장 0개</span>
         <span style="font-size:12px;color:var(--text3)">저장: Ctrl+S</span>
       </div>
-
       <div class="translation-wrap" id="translationWrap" style="display:none">
         <div class="translation-label"><i class="ti ti-language" style="font-size:14px"></i>한국어 번역</div>
         <div class="translation-box" id="translationBox"></div>
@@ -450,23 +379,20 @@
     </div>
   </div>
 
-  <!-- ════ MEMORIZE ════ -->
+  <!-- MEMORIZE -->
   <div id="memorizeScreen" class="screen">
     <div class="topbar">
       <button class="back-btn" onclick="showScreen('editorScreen')" aria-label="편집으로"><i class="ti ti-arrow-left"></i></button>
       <div class="topbar-title" id="memoTitle"></div>
     </div>
-
     <div class="memo-tabs">
       <button class="memo-tab active" id="tabRead" onclick="switchTab('read')"><i class="ti ti-book" style="font-size:14px;vertical-align:-1px"></i> 원문 보기</button>
       <button class="memo-tab" id="tabWrite" onclick="switchTab('write')"><i class="ti ti-pencil" style="font-size:14px;vertical-align:-1px"></i> 본문 적기</button>
     </div>
-
     <div id="readTab" class="memo-content active">
       <p class="read-info">문장 위에 마우스를 올리면 한국어 번역이 보여요.</p>
       <div class="read-view" id="readView"></div>
     </div>
-
     <div id="writeTab" class="memo-content">
       <div class="write-info">
         <i class="ti ti-info-circle" style="font-size:14px;vertical-align:-2px;margin-right:4px"></i>
@@ -483,24 +409,43 @@
 
 </div>
 
+<!-- 폴더 생성/수정 모달 -->
+<div class="modal-overlay hidden" id="folderModal">
+  <div class="modal">
+    <h3 id="folderModalTitle">새 폴더</h3>
+    <input class="modal-input" id="folderNameInput" placeholder="폴더 이름" maxlength="40"
+      onkeydown="if(event.key==='Enter')confirmFolderModal()">
+    <div class="modal-actions">
+      <button class="btn" onclick="closeFolderModal()">취소</button>
+      <button class="btn btn-dark" onclick="confirmFolderModal()">확인</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
-// ── STATE ──────────────────────────────────────────
-const LS_KEY = 'english_memo_docs';
-let docs = [];
-let currentId = null;
+const LS_DOCS = 'english_memo_docs';
+const LS_FOLDERS = 'english_memo_folders';
 
-function loadDocs() {
-  try { docs = JSON.parse(localStorage.getItem(LS_KEY)) || []; }
-  catch(e) { docs = []; }
+let docs = [];
+let folders = [];
+let currentId = null;
+let currentFilter = 'all';   // 'all' | 'folder' | 'none'
+let activeFolderId = null;   // 폴더 클릭 시 설정
+let editingFolderId = null;  // 폴더 수정 시
+
+function loadData() {
+  try { docs = JSON.parse(localStorage.getItem(LS_DOCS)) || []; } catch(e) { docs = []; }
+  try { folders = JSON.parse(localStorage.getItem(LS_FOLDERS)) || []; } catch(e) { folders = []; }
 }
-function saveDocs() {
-  localStorage.setItem(LS_KEY, JSON.stringify(docs));
+function saveData() {
+  localStorage.setItem(LS_DOCS, JSON.stringify(docs));
+  localStorage.setItem(LS_FOLDERS, JSON.stringify(folders));
 }
 function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2,6); }
 
-// ── SENTENCES ──────────────────────────────────────
+// ── SENTENCES ──
 function parseSentences(text) {
   if (!text || !text.trim()) return [];
   const matches = text.match(/[^.!?]+[.!?]+/g) || [];
@@ -510,48 +455,155 @@ function parseSentences(text) {
   return sents;
 }
 
-// ── SCREENS ────────────────────────────────────────
+// ── SCREENS ──
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   window.scrollTo(0, 0);
 }
 
-// ── HOME ───────────────────────────────────────────
-function renderHome() {
-  const grid = document.getElementById('docGrid');
-  const realDocs = docs.filter(d => d.body || d.title);
+// ── FOLDER MODAL ──
+function openNewFolderModal() {
+  editingFolderId = null;
+  document.getElementById('folderModalTitle').textContent = '새 폴더';
+  document.getElementById('folderNameInput').value = '';
+  document.getElementById('folderModal').classList.remove('hidden');
+  setTimeout(() => document.getElementById('folderNameInput').focus(), 50);
+}
+function openEditFolderModal(id) {
+  const f = folders.find(f => f.id === id);
+  if (!f) return;
+  editingFolderId = id;
+  document.getElementById('folderModalTitle').textContent = '폴더 이름 변경';
+  document.getElementById('folderNameInput').value = f.name;
+  document.getElementById('folderModal').classList.remove('hidden');
+  setTimeout(() => document.getElementById('folderNameInput').focus(), 50);
+}
+function closeFolderModal() {
+  document.getElementById('folderModal').classList.add('hidden');
+}
+function confirmFolderModal() {
+  const name = document.getElementById('folderNameInput').value.trim();
+  if (!name) return;
+  if (editingFolderId) {
+    const f = folders.find(f => f.id === editingFolderId);
+    if (f) f.name = name;
+  } else {
+    folders.push({ id: uid(), name, createdAt: Date.now() });
+  }
+  saveData();
+  closeFolderModal();
+  renderHome();
+}
+document.getElementById('folderModal').addEventListener('click', function(e) {
+  if (e.target === this) closeFolderModal();
+});
 
-  if (realDocs.length === 0) {
-    grid.innerHTML = `
-      <div class="doc-card new-card" onclick="openNewDoc()">
-        <i class="ti ti-plus"></i>
-        <span>첫 문서 만들기</span>
+function deleteFolder(id) {
+  if (!confirm('폴더를 삭제할까요? 안에 있는 문서는 미분류로 이동됩니다.')) return;
+  folders = folders.filter(f => f.id !== id);
+  docs.forEach(d => { if (d.folderId === id) d.folderId = null; });
+  if (activeFolderId === id) { activeFolderId = null; currentFilter = 'all'; }
+  saveData();
+  renderHome();
+}
+
+// ── HOME ──
+function clickFolder(id) {
+  if (activeFolderId === id) {
+    activeFolderId = null;
+    currentFilter = 'all';
+  } else {
+    activeFolderId = id;
+    currentFilter = 'folder';
+  }
+  renderHome();
+}
+
+function setFilter(f) {
+  currentFilter = f;
+  renderHome();
+}
+
+function renderHome() {
+  // 폴더 그리드
+  const fg = document.getElementById('folderGrid');
+  if (folders.length === 0) {
+    fg.innerHTML = `<div style="font-size:13px;color:var(--text3);padding:8px 0">폴더가 없어요. 새 폴더를 만들어보세요.</div>`;
+  } else {
+    fg.innerHTML = folders.map(f => {
+      const cnt = docs.filter(d => d.folderId === f.id && (d.body || d.title)).length;
+      const isActive = activeFolderId === f.id;
+      return `<div class="folder-card${isActive ? ' active-folder' : ''}" onclick="clickFolder('${f.id}')">
+        <button class="folder-del" onclick="event.stopPropagation();deleteFolder('${f.id}')" aria-label="폴더 삭제"><i class="ti ti-x"></i></button>
+        <i class="ti ti-folder${isActive ? '-open' : ''} folder-icon"></i>
+        <div class="folder-info">
+          <div class="folder-name">${esc(f.name)}</div>
+          <div class="folder-count">${cnt}개 문서</div>
+        </div>
+        <button style="background:none;border:none;cursor:pointer;color:var(--text3);font-size:13px;padding:3px;margin-left:auto;flex-shrink:0" onclick="event.stopPropagation();openEditFolderModal('${f.id}')" aria-label="이름 변경"><i class="ti ti-pencil"></i></button>
       </div>`;
-    return;
+    }).join('');
   }
 
+  // 필터바 표시 여부
+  const filterBar = document.getElementById('filterBar');
+  if (activeFolderId) {
+    filterBar.style.display = 'flex';
+    const f = folders.find(f => f.id === activeFolderId);
+    document.getElementById('filterFolderName').textContent = f ? f.name : '폴더';
+  } else {
+    filterBar.style.display = 'none';
+    currentFilter = 'all';
+  }
+
+  // 필터 칩 active 상태
+  ['All','Folder','None'].forEach(k => {
+    document.getElementById('filter'+k)?.classList.toggle('active', currentFilter === k.toLowerCase());
+  });
+
+  // 섹션 타이틀
+  let sectionTitle = '전체 문서';
+  if (activeFolderId && currentFilter === 'folder') {
+    const f = folders.find(f => f.id === activeFolderId);
+    sectionTitle = f ? f.name : '폴더';
+  } else if (currentFilter === 'none') {
+    sectionTitle = '미분류 문서';
+  }
+  document.getElementById('docSectionTitle').textContent = sectionTitle;
+
+  // 문서 필터링
+  let filtered = docs.filter(d => d.body || d.title);
+  if (currentFilter === 'folder' && activeFolderId) {
+    filtered = filtered.filter(d => d.folderId === activeFolderId);
+  } else if (currentFilter === 'none') {
+    filtered = filtered.filter(d => !d.folderId);
+  }
+
+  // 문서 그리드
+  const grid = document.getElementById('docGrid');
   let html = `<div class="doc-card new-card" onclick="openNewDoc()"><i class="ti ti-plus"></i><span>새 문서</span></div>`;
-  [...realDocs].reverse().forEach(d => {
+  [...filtered].reverse().forEach(d => {
     const n = parseSentences(d.body).length;
-    html += `
-      <div class="doc-card" onclick="openDoc('${d.id}')">
-        <button class="doc-card-del" onclick="event.stopPropagation();deleteDoc('${d.id}')" aria-label="삭제"><i class="ti ti-x"></i></button>
-        <div class="doc-card-title">${esc(d.title || '제목 없음')}</div>
-        <div class="doc-card-preview">${esc(d.body.slice(0, 90))}</div>
-        <div class="doc-card-meta">
-          <span class="pill">${n}문장</span>
-          ${d.translation ? '<span class="pill pill-sky">번역완료</span>' : ''}
-        </div>
-      </div>`;
+    const folder = d.folderId ? folders.find(f => f.id === d.folderId) : null;
+    html += `<div class="doc-card" onclick="openDoc('${d.id}')">
+      <button class="doc-card-del" onclick="event.stopPropagation();deleteDoc('${d.id}')" aria-label="삭제"><i class="ti ti-x"></i></button>
+      <div class="doc-card-title">${esc(d.title || '제목 없음')}</div>
+      <div class="doc-card-preview">${esc(d.body.slice(0, 90))}</div>
+      <div class="doc-card-meta">
+        <span class="pill">${n}문장</span>
+        ${d.translation ? '<span class="pill pill-sky">번역완료</span>' : ''}
+        ${folder ? `<span class="pill" style="background:var(--surface2)"><i class="ti ti-folder" style="font-size:10px;vertical-align:-1px;margin-right:3px"></i>${esc(folder.name)}</span>` : ''}
+      </div>
+    </div>`;
   });
   grid.innerHTML = html;
 }
 
 function openNewDoc() {
-  const doc = { id: uid(), title: '', body: '', translation: '', createdAt: Date.now() };
+  const doc = { id: uid(), title: '', body: '', translation: '', folderId: activeFolderId || null, createdAt: Date.now() };
   docs.push(doc);
-  saveDocs();
+  saveData();
   currentId = doc.id;
   loadEditor(doc);
   showScreen('editorScreen');
@@ -563,12 +615,14 @@ function openDoc(id) {
   if (doc) { loadEditor(doc); showScreen('editorScreen'); }
 }
 
-// ── EDITOR ─────────────────────────────────────────
+// ── EDITOR ──
 function loadEditor(doc) {
   document.getElementById('docTitleInput').value = doc.title || '';
   document.getElementById('bodyInput').value = doc.body || '';
   document.getElementById('editorTopTitle').textContent = doc.title || '새 문서';
   updateSentCount();
+  populateFolderSelect(doc.folderId);
+  updateEditorBreadcrumb(doc.folderId);
   if (doc.translation) {
     document.getElementById('translationWrap').style.display = 'block';
     document.getElementById('translationBox').textContent = doc.translation;
@@ -577,16 +631,41 @@ function loadEditor(doc) {
   }
 }
 
-function onTitleInput() {
-  document.getElementById('editorTopTitle').textContent =
-    document.getElementById('docTitleInput').value || '새 문서';
+function populateFolderSelect(selectedId) {
+  const sel = document.getElementById('folderSelect');
+  sel.innerHTML = '<option value="">📁 폴더 없음</option>' +
+    folders.map(f => `<option value="${f.id}"${f.id === selectedId ? ' selected' : ''}>${esc(f.name)}</option>`).join('');
 }
 
-function onBodyInput() { updateSentCount(); }
+function onFolderSelectChange() {
+  const doc = docs.find(d => d.id === currentId);
+  if (!doc) return;
+  doc.folderId = document.getElementById('folderSelect').value || null;
+  updateEditorBreadcrumb(doc.folderId);
+  saveData();
+}
 
+function updateEditorBreadcrumb(folderId) {
+  const crumbEl = document.getElementById('editorFolderCrumb');
+  const sepEl = document.getElementById('editorFolderSep');
+  const folder = folderId ? folders.find(f => f.id === folderId) : null;
+  if (folder) {
+    crumbEl.textContent = folder.name;
+    crumbEl.style.display = 'inline';
+    sepEl.style.display = 'inline';
+  } else {
+    crumbEl.style.display = 'none';
+    sepEl.style.display = 'none';
+  }
+}
+
+function onTitleInput() {
+  const val = document.getElementById('docTitleInput').value;
+  document.getElementById('editorTopTitle').textContent = val || '새 문서';
+}
+function onBodyInput() { updateSentCount(); }
 function updateSentCount() {
-  const val = document.getElementById('bodyInput').value;
-  const n = parseSentences(val).length;
+  const n = parseSentences(document.getElementById('bodyInput').value).length;
   document.getElementById('sentCount').textContent = `문장 ${n}개`;
 }
 
@@ -595,7 +674,7 @@ function saveDoc() {
   if (!doc) return;
   doc.title = document.getElementById('docTitleInput').value.trim() || '제목 없음';
   doc.body = document.getElementById('bodyInput').value.trim();
-  saveDocs();
+  saveData();
   renderHome();
   toast('저장했어요 ✓');
 }
@@ -603,86 +682,65 @@ function saveDoc() {
 function deleteCurrentDoc() {
   if (!confirm('이 문서를 삭제할까요?')) return;
   docs = docs.filter(d => d.id !== currentId);
-  saveDocs();
-  renderHome();
-  showScreen('homeScreen');
+  saveData(); renderHome(); showScreen('homeScreen');
 }
-
 function deleteDoc(id) {
   if (!confirm('이 문서를 삭제할까요?')) return;
   docs = docs.filter(d => d.id !== id);
-  saveDocs();
-  renderHome();
+  saveData(); renderHome();
 }
 
-function goHome() {
-  saveDoc();
-  renderHome();
-  showScreen('homeScreen');
-}
+function goHome() { saveDoc(); renderHome(); showScreen('homeScreen'); }
 
-// Ctrl+S 저장
 document.addEventListener('keydown', e => {
   if ((e.ctrlKey || e.metaKey) && e.key === 's') {
     e.preventDefault();
-    const screen = document.querySelector('.screen.active');
-    if (screen && screen.id === 'editorScreen') saveDoc();
+    if (document.querySelector('.screen.active')?.id === 'editorScreen') saveDoc();
   }
 });
 
-// ── TRANSLATION ────────────────────────────────────
+// ── TRANSLATION ──
 async function translateDoc() {
   const body = document.getElementById('bodyInput').value.trim();
   if (!body) { toast('먼저 영어 본문을 입력해주세요.'); return; }
-
   const btn = event.currentTarget;
   btn.disabled = true;
   btn.innerHTML = '<i class="ti ti-loader-2"></i>번역 중...';
-
   document.getElementById('translationWrap').style.display = 'block';
   const box = document.getElementById('translationBox');
   box.textContent = '번역하는 중...';
   box.classList.add('loading');
-
   try {
     const sents = parseSentences(body);
     const results = [];
     for (const s of sents) {
-      const res = await fetch(
-        `https://api.mymemory.translated.net/get?q=${encodeURIComponent(s)}&langpair=en|ko`
-      );
+      const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(s)}&langpair=en|ko`);
       const data = await res.json();
       results.push(data.responseData?.translatedText || s);
     }
     const translated = results.join(' ');
     box.textContent = translated;
     box.classList.remove('loading');
-
     const doc = docs.find(d => d.id === currentId);
-    if (doc) { doc.translation = translated; saveDocs(); }
+    if (doc) { doc.translation = translated; saveData(); }
   } catch(e) {
-    box.textContent = '번역 중 오류가 발생했어요. 잠시 후 다시 시도해주세요.';
+    box.textContent = '번역 중 오류가 발생했어요.';
     box.classList.remove('loading');
   }
-
   btn.disabled = false;
   btn.innerHTML = '<i class="ti ti-language"></i>한국어 번역';
 }
 
-// ── MEMORIZE ───────────────────────────────────────
+// ── MEMORIZE ──
 function goMemorize() {
   const doc = docs.find(d => d.id === currentId);
   if (!doc) return;
   doc.title = document.getElementById('docTitleInput').value.trim() || '제목 없음';
   doc.body = document.getElementById('bodyInput').value.trim();
-  saveDocs();
-
+  saveData();
   if (!doc.body) { toast('본문을 먼저 입력해주세요.'); return; }
-
   document.getElementById('memoTitle').textContent = doc.title;
-  renderReadTab(doc);
-  renderWriteTab(doc);
-  switchTab('read');
+  renderReadTab(doc); renderWriteTab(doc); switchTab('read');
   showScreen('memorizeScreen');
 }
 
@@ -691,7 +749,7 @@ function renderReadTab(doc) {
   const krs = doc.translation ? parseSentences(doc.translation) : [];
   document.getElementById('readView').innerHTML = sents.map((s, i) => `
     <div class="read-row">
-      <span class="read-num">${i + 1}</span>
+      <span class="read-num">${i+1}</span>
       <div class="read-text">
         <div class="read-en">${esc(s)}</div>
         ${krs[i] ? `<div class="read-kr">${esc(krs[i])}</div>` : ''}
@@ -704,23 +762,14 @@ function renderWriteTab(doc) {
   document.getElementById('writeSentTotal').textContent = sents.length;
   document.getElementById('writeArea').innerHTML = sents.map((s, i) => `
     <div class="write-row">
-      <span class="write-num">${i + 1}</span>
-      <textarea
-        class="write-input"
-        id="wi_${i}"
-        placeholder="문장 ${i + 1} · ${s.length}자"
-        rows="1"
-        oninput="autoResize(this)"
-        spellcheck="false"
-      ></textarea>
+      <span class="write-num">${i+1}</span>
+      <textarea class="write-input" id="wi_${i}" placeholder="문장 ${i+1} · ${s.length}자"
+        rows="1" oninput="autoResize(this)" spellcheck="false"></textarea>
     </div>`).join('');
   document.getElementById('resultArea').innerHTML = '';
 }
 
-function autoResize(el) {
-  el.style.height = 'auto';
-  el.style.height = el.scrollHeight + 'px';
-}
+function autoResize(el) { el.style.height = 'auto'; el.style.height = el.scrollHeight + 'px'; }
 
 function switchTab(tab) {
   document.getElementById('tabRead').classList.toggle('active', tab === 'read');
@@ -744,33 +793,27 @@ function submitWrite() {
   if (!doc) return;
   const sents = parseSentences(doc.body);
   let total = 0;
-
   const items = sents.map((s, i) => {
     const inp = (document.getElementById('wi_' + i)?.value || '').trim();
     const sim = calcSim(s, inp);
     total += sim;
     return { s, inp, sim };
   });
-
   const avg = Math.round(total / sents.length);
-  const scoreClass = avg === 100 ? 'score-perfect' : avg >= 70 ? 'score-good' : 'score-bad';
   const emoji = avg === 100 ? '🎉' : avg >= 70 ? '👍' : '💪';
   const msg = avg === 100 ? '완벽해요! 다 외웠어요.' : avg >= 70 ? '거의 다 맞았어요!' : '조금 더 연습해봐요.';
-
   const resultItems = items.map((it, i) => {
     const cls = it.sim === 100 ? 'score-perfect' : it.sim >= 70 ? 'score-good' : 'score-bad';
     const label = it.sim === 100 ? '완벽' : it.sim >= 70 ? '거의 맞음' : '틀림';
-    return `
-      <div class="result-item">
-        <div class="result-item-header">
-          <span class="result-item-num">문장 ${i + 1}</span>
-          <span class="score-pill ${cls}">${label} ${it.sim}%</span>
-        </div>
-        <div class="result-original">정답: ${esc(it.s)}</div>
-        <div class="result-mine">${it.inp ? diffHtml(it.s, it.inp) : '<span class="result-none">입력 없음</span>'}</div>
-      </div>`;
+    return `<div class="result-item">
+      <div class="result-item-header">
+        <span class="result-item-num">문장 ${i+1}</span>
+        <span class="score-pill ${cls}">${label} ${it.sim}%</span>
+      </div>
+      <div class="result-original">정답: ${esc(it.s)}</div>
+      <div class="result-mine">${it.inp ? diffHtml(it.s, it.inp) : '<span class="result-none">입력 없음</span>'}</div>
+    </div>`;
   }).join('');
-
   document.getElementById('resultArea').innerHTML = `
     <div class="result-summary">
       <div>
@@ -781,25 +824,17 @@ function submitWrite() {
       <div class="result-msg">${msg}</div>
     </div>
     <div class="result-list">${resultItems}</div>`;
-
   document.getElementById('resultArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-// ── DIFF ────────────────────────────────────────────
 function diffHtml(orig, inp) {
   let html = '';
   for (let i = 0; i < inp.length; i++) {
-    if (i < orig.length) {
-      html += inp[i] === orig[i]
-        ? `<span class="char-ok">${esc(inp[i])}</span>`
-        : `<span class="char-err">${esc(inp[i])}</span>`;
-    } else {
-      html += `<span class="char-err">${esc(inp[i])}</span>`;
-    }
+    html += i < orig.length
+      ? (inp[i] === orig[i] ? `<span class="char-ok">${esc(inp[i])}</span>` : `<span class="char-err">${esc(inp[i])}</span>`)
+      : `<span class="char-err">${esc(inp[i])}</span>`;
   }
-  if (inp.length < orig.length) {
-    html += `<span class="char-miss">${esc(orig.slice(inp.length))}</span>`;
-  }
+  if (inp.length < orig.length) html += `<span class="char-miss">${esc(orig.slice(inp.length))}</span>`;
   return html;
 }
 
@@ -811,13 +846,8 @@ function calcSim(a, b) {
   return Math.round(m / Math.max(s1.length, s2.length) * 100);
 }
 
-// ── UTILS ───────────────────────────────────────────
 function esc(t) {
-  return String(t)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
+  return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
 let toastTimer;
@@ -829,8 +859,7 @@ function toast(msg) {
   toastTimer = setTimeout(() => el.classList.remove('show'), 2000);
 }
 
-// ── INIT ────────────────────────────────────────────
-loadDocs();
+loadData();
 renderHome();
 </script>
 </body>
