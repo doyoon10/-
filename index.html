@@ -284,6 +284,10 @@
   .read-en { font-size: 14px; line-height: 1.8; }
   .read-kr { font-size: 12px; color: var(--text2); margin-top: 3px; display: none; }
   .read-row:hover .read-kr { display: block; }
+  .read-kr-wrap { display: none !important; align-items: flex-start; gap: 6px; margin-top: 2px; }
+  .read-row:hover .read-kr-wrap { display: flex !important; }
+  .kr-always .read-kr-wrap { display: flex !important; }
+  .kr-always .read-kr { display: block !important; }
   .write-info { font-size: 12px; color: var(--text2); margin-bottom: 16px; padding: 10px 14px; background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius-sm); line-height: 1.65; }
   .write-area { display: flex; flex-direction: column; gap: 8px; }
   .write-row { display: flex; gap: 10px; align-items: flex-start; }
@@ -356,9 +360,6 @@
   .kr-edit-actions { display: flex; gap: 6px; justify-content: flex-end; }
 
   .divider { height: 0.5px; background: var(--border); margin: 24px 0; }
-
-  /* KR ALWAYS VISIBLE */
-  .kr-always .read-kr { display: block !important; }
 
   /* HIGHLIGHT */
   .hl-yellow { background: #ffe066; border-radius: 3px; padding: 0 1px; color: #7a5500; }
