@@ -334,10 +334,18 @@
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
   /* KR INLINE EDIT */
-  .editable-kr { cursor: pointer; border-radius: 4px; transition: background 0.12s; }
-  .editable-kr:hover { background: var(--surface2); }
+  .read-kr-wrap { display: flex; align-items: flex-start; gap: 6px; margin-top: 2px; }
+  .read-kr-wrap .read-kr { flex: 1; margin-top: 0 !important; display: block !important; }
   .read-kr-empty { color: var(--text3) !important; font-style: italic; }
-  .editing-kr { cursor: default; background: var(--surface2) !important; padding: 6px 8px !important; border-radius: 6px; }
+  .editable-kr { cursor: pointer; border-radius: 4px; transition: background 0.12s; padding: 1px 3px; }
+  .editable-kr:hover { background: var(--surface2); }
+  .kr-edit-btn {
+    flex-shrink: 0; background: none; border: none; cursor: pointer;
+    color: var(--text3); font-size: 13px; padding: 3px 5px; border-radius: 4px;
+    opacity: 0; transition: opacity 0.15s; line-height: 1;
+  }
+  .read-row:hover .kr-edit-btn { opacity: 1; }
+  .editing-kr { cursor: default; background: var(--surface2) !important; padding: 6px 8px !important; border-radius: 6px; flex: 1; }
   .kr-edit-input {
     width: 100%; border: 0.5px solid var(--border-md); border-radius: var(--radius-sm);
     padding: 6px 8px; font-size: 13px; font-family: inherit; line-height: 1.6;
@@ -962,10 +970,13 @@ function renderReadTab(doc) {
       <span class="read-num">${i+1}</span>
       <div class="read-text">
         <div class="read-en" id="readEn_${i}">${buildReadEnHtml(s, i, doc)}</div>
-        ${krs[i]
-          ? `<div class="read-kr editable-kr" id="readKr_${i}" title="클릭해서 번역 수정" onclick="editKr(${i})">${esc(krs[i])}</div>`
-          : `<div class="read-kr editable-kr read-kr-empty" id="readKr_${i}" title="클릭해서 번역 추가" onclick="editKr(${i})">번역 추가…</div>`
-        }
+        <div class="read-kr-wrap">
+          ${krs[i]
+            ? `<div class="read-kr editable-kr" id="readKr_${i}" onclick="editKr(${i})">${esc(krs[i])}</div>`
+            : `<div class="read-kr editable-kr read-kr-empty" id="readKr_${i}" onclick="editKr(${i})">번역 없음</div>`
+          }
+          <button class="kr-edit-btn" onclick="editKr(${i})" title="번역 수정"><i class="ti ti-pencil"></i></button>
+        </div>
       </div>
     </div>`).join('');
 }
