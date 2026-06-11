@@ -1381,14 +1381,12 @@ let dragDocId = null;
 function onDocDragStart(e, docId) {
   dragDocId = docId;
   e.dataTransfer.effectAllowed = 'move';
-  // slight delay so the card renders as dragging
+  e.dataTransfer.setData('text/plain', docId);
   setTimeout(() => {
-    const el = document.querySelector(`[data-doc-id="${docId}"]`);
+    const el = document.querySelector('[data-doc-id="' + docId + '"]');
     if (el) el.classList.add('dragging');
   }, 0);
-  // show hint & folder targets
   document.getElementById('dragHint').classList.add('visible');
-  document.querySelectorAll('.folder-card').forEach(fc => fc.setAttribute('data-drop-target','true'));
 }
 
 function onDocDragEnd(e) {
@@ -1396,19 +1394,19 @@ function onDocDragEnd(e) {
   document.querySelectorAll('.doc-card').forEach(c => c.classList.remove('dragging'));
   document.querySelectorAll('.folder-card').forEach(fc => fc.classList.remove('drag-over'));
   document.getElementById('docGridWrap').classList.remove('drag-over-none');
+  document.getElementById('dragHint').classList.remove('visible');
 }
 
 function onFolderDragOver(e, folderId) {
-  if (!dragDocId) return;
   e.preventDefault();
+  e.stopPropagation();
   e.dataTransfer.dropEffect = 'move';
   document.querySelectorAll('.folder-card').forEach(fc => fc.classList.remove('drag-over'));
-  const target = document.querySelector(`[data-folder-id="${folderId}"]`);
+  const target = document.querySelector('[data-folder-id="' + folderId + '"]');
   if (target) target.classList.add('drag-over');
 }
 
 function onFolderDragLeave(e) {
-  // only remove if truly leaving the card (not entering a child)
   if (!e.currentTarget.contains(e.relatedTarget)) {
     e.currentTarget.classList.remove('drag-over');
   }
@@ -1416,16 +1414,19 @@ function onFolderDragLeave(e) {
 
 function onFolderDrop(e, folderId) {
   e.preventDefault();
-  if (!dragDocId) return;
-  const doc = docs.find(d => d.id === dragDocId);
+  e.stopPropagation();
+  const docId = e.dataTransfer.getData('text/plain') || dragDocId;
+  if (!docId) return;
+  const doc = docs.find(d => d.id === docId);
   if (doc) {
     doc.folderId = folderId;
     saveData();
     renderHome();
     const f = folders.find(f => f.id === folderId);
-    toast(`"${doc.title || '문서'}"를 "${f?.name || '폴더'}"에 넣었어요`);
+    toast('"' + (doc.title || '문서') + '"를 "' + (f ? f.name : '폴더') + '"에 넣었어요');
   }
   document.querySelectorAll('.folder-card').forEach(fc => fc.classList.remove('drag-over'));
+  dragDocId = null;
 }
 
 function onNoneZoneDragOver(e) {
