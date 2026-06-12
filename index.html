@@ -1179,7 +1179,7 @@ function onTextMouseUp(e) {
   }
 
   // ignore clicks inside toolbar/popup
-  if (e.target.closest('#hlToolbar') || e.target.closest('#memoInputPopup')) return;
+  if (e.target.closest('#hlPanel') || e.target.closest('#memoTooltip')) return;
 
   const sel = window.getSelection();
   if (!sel || sel.isCollapsed) {
@@ -1298,39 +1298,6 @@ function eraseHighlight() {
   hideHlToolbar();
 }
 
-function openMemoInput() {
-  if (!hlSelection) return;
-  const doc = docs.find(d => d.id === currentId);
-  if (!doc) return;
-  if (!doc.annotations) doc.annotations = [];
-  // Create/find annotation for this range
-  let ann = doc.annotations.find(a => a.sentIdx === hlSelection.sentIdx && a.start === hlSelection.start && a.end === hlSelection.end);
-  if (!ann) {
-    ann = { id: uid(), sentIdx: hlSelection.sentIdx, start: hlSelection.start, end: hlSelection.end, hlClass: 'hl-blue', memo: '' };
-    doc.annotations = doc.annotations.filter(a =>
-      !(a.sentIdx === hlSelection.sentIdx && a.start < hlSelection.end && a.end > hlSelection.start)
-    );
-    doc.annotations.push(ann);
-  }
-  pendingMemoAnnId = ann.id;
-  document.getElementById('memoTextInput').value = ann.memo || '';
-
-  const tb = document.getElementById('hlToolbar');
-  const tbRect = tb.getBoundingClientRect();
-  const popup = document.getElementById('memoInputPopup');
-  popup.classList.remove('hidden');
-  popup.style.position = 'absolute';
-  popup.style.left = tbRect.left + 'px';
-  popup.style.top = (tbRect.bottom + window.scrollY + 6) + 'px';
-  setTimeout(() => document.getElementById('memoTextInput').focus(), 50);
-  hideHlToolbar();
-}
-
-function closeMemoInput() {
-  document.getElementById('memoInputPopup').classList.add('hidden');
-  pendingMemoAnnId = null;
-}
-
 function saveMemoInput() {
   const doc = docs.find(d => d.id === currentId);
   if (!doc) { closeHlPanel(); return; }
@@ -1368,7 +1335,7 @@ function editAnnotation(annId) {
   el.style.position = 'fixed';
   el.style.left = Math.min(e.clientX + 12, window.innerWidth - 280) + 'px';
   el.style.top  = (e.clientY - 36) + 'px';
-}
+
 function hideMemoTooltip() {
   document.getElementById('memoTooltip').classList.add('hidden');
 }
