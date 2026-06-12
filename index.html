@@ -656,9 +656,11 @@ function uid() { return Date.now().toString(36) + Math.random().toString(36).sli
 // ── SENTENCES ──
 function parseSentences(text) {
   if (!text || !text.trim()) return [];
-  const matches = text.match(/[^.!?]+[.!?]+/g) || [];
-  const sents = matches.map(s => s.trim()).filter(s => s.length > 1);
-  const rest = text.replace(/[^.!?]+[.!?]+/g, '').trim();
+  // Replace punctuation inside quotes with placeholders so they don't split sentences
+  const placeholder = text.replace(/"[^"]*"/g, m => m.replace(/[.!?]/g, '\x00'));
+  const matches = placeholder.match(/[^.!?]+[.!?]+['"'"\]\)】]*/g) || [];
+  const sents = matches.map(s => s.replace(/\x00/g, '.').trim()).filter(s => s.length > 1);
+  const rest = placeholder.replace(/[^.!?]+[.!?]+['"'"\]\)】]*/g, '').replace(/\x00/g, '.').trim();
   if (rest.length > 1) sents.push(rest);
   return sents;
 }
