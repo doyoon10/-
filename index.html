@@ -27,36 +27,18 @@
     --radius: 10px;
     --radius-sm: 6px;
   }
-
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #1a1a18;
-      --surface: #242422;
-      --surface2: #2e2e2b;
-      --border: rgba(255,255,255,0.10);
-      --border-md: rgba(255,255,255,0.18);
-      --text: #f0ede8;
-      --text2: #8c8c88;
-      --text3: #5a5a57;
-      --sky: #0d2030;
-      --sky-text: #72bceb;
-      --sky-border: #1a4060;
-      --green: #0a2018;
-      --green-text: #4fcf87;
-      --red-bg: #2a0d0d;
-      --red: #f87171;
+      --bg: #1a1a18; --surface: #242422; --surface2: #2e2e2b;
+      --border: rgba(255,255,255,0.10); --border-md: rgba(255,255,255,0.18);
+      --text: #f0ede8; --text2: #8c8c88; --text3: #5a5a57;
+      --sky: #0d2030; --sky-text: #72bceb; --sky-border: #1a4060;
+      --green: #0a2018; --green-text: #4fcf87;
+      --red-bg: #2a0d0d; --red: #f87171;
     }
   }
 
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    font-size: 15px;
-    line-height: 1.6;
-  }
-
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 15px; line-height: 1.6; }
   .app { max-width: 880px; margin: 0 auto; padding: 32px 20px 80px; }
   .screen { display: none; }
   .screen.active { display: block; }
@@ -65,11 +47,7 @@
   .topbar { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; }
   .topbar-logo { font-size: 19px; font-weight: 600; letter-spacing: -0.4px; color: var(--text); }
   .topbar-logo span { color: var(--text2); font-weight: 400; }
-  .back-btn {
-    background: none; border: 0.5px solid var(--border-md);
-    border-radius: var(--radius-sm); cursor: pointer; color: var(--text2);
-    font-size: 16px; padding: 6px 8px; display: flex; align-items: center; transition: all 0.15s;
-  }
+  .back-btn { background: none; border: 0.5px solid var(--border-md); border-radius: var(--radius-sm); cursor: pointer; color: var(--text2); font-size: 16px; padding: 6px 8px; display: flex; align-items: center; transition: all 0.15s; }
   .back-btn:hover { background: var(--surface2); color: var(--text); }
   .topbar-title { font-size: 17px; font-weight: 500; }
   .topbar-breadcrumb { font-size: 13px; color: var(--text3); display: flex; align-items: center; gap: 6px; }
@@ -78,13 +56,7 @@
   .topbar-breadcrumb .crumb:hover { color: var(--text); text-decoration: underline; }
 
   /* BUTTONS */
-  .btn {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 7px 14px; border-radius: var(--radius-sm);
-    border: 0.5px solid var(--border-md); background: var(--surface);
-    color: var(--text2); font-size: 13px; cursor: pointer;
-    transition: all 0.15s; white-space: nowrap; font-family: inherit;
-  }
+  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: var(--radius-sm); border: 0.5px solid var(--border-md); background: var(--surface); color: var(--text2); font-size: 13px; cursor: pointer; transition: all 0.15s; white-space: nowrap; font-family: inherit; }
   .btn:hover { background: var(--surface2); color: var(--text); }
   .btn i { font-size: 15px; }
   .btn-dark { background: var(--text); color: var(--bg); border-color: var(--text); }
@@ -94,12 +66,9 @@
   .btn-danger { color: var(--red); border-color: var(--red); }
   .btn-danger:hover { background: var(--red-bg); }
 
-  /* PILL */
   .pill { display: inline-block; font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 20px; background: var(--surface2); color: var(--text2); border: 0.5px solid var(--border); }
   .pill-sky { background: var(--sky); color: var(--sky-text); border-color: var(--sky-border); }
-  .pill-green { background: var(--green); color: var(--green-text); border-color: transparent; }
 
-  /* SECTION HEADER */
   .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; margin-top: 28px; }
   .section-header:first-child { margin-top: 0; }
   .section-header h2 { font-size: 12px; font-weight: 500; color: var(--text3); letter-spacing: 0.5px; text-transform: uppercase; display: flex; align-items: center; gap: 6px; }
@@ -108,199 +77,132 @@
 
   /* FOLDER GRID */
   .folder-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin-bottom: 8px; }
-  .folder-card {
-    background: var(--surface); border: 0.5px solid var(--border);
-    border-radius: var(--radius); padding: 14px 16px;
-    cursor: pointer; transition: border-color 0.15s, box-shadow 0.15s, background 0.15s, transform 0.1s;
-    display: flex; align-items: center; gap: 10px; position: relative;
-  }
+  .folder-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 14px 16px; cursor: pointer; transition: border-color 0.15s, box-shadow 0.15s, background 0.15s, transform 0.1s; display: flex; align-items: center; gap: 10px; position: relative; }
   .folder-card:hover { border-color: var(--border-md); box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
   .folder-card.active-folder { border-color: var(--sky-border); background: var(--sky); }
-  .folder-card.drag-over {
-    border: 2px dashed var(--sky-border) !important;
-    background: var(--sky) !important;
-    transform: scale(1.02);
-    box-shadow: 0 4px 16px rgba(26,111,160,0.15);
-  }
+  .folder-card.drag-over { border: 2px dashed var(--sky-border) !important; background: var(--sky) !important; transform: scale(1.02); box-shadow: 0 4px 16px rgba(26,111,160,0.15); }
   .folder-icon { font-size: 18px; color: var(--text2); flex-shrink: 0; }
-  .folder-card.active-folder .folder-icon { color: var(--sky-text); }
-  .folder-card.drag-over .folder-icon { color: var(--sky-text); }
+  .folder-card.active-folder .folder-icon, .folder-card.drag-over .folder-icon { color: var(--sky-text); }
   .folder-info { flex: 1; min-width: 0; }
   .folder-name { font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .folder-count { font-size: 11px; color: var(--text3); margin-top: 2px; }
-  .folder-card.active-folder .folder-count { color: var(--sky-text); opacity: 0.8; }
-  .folder-del {
-    position: absolute; top: 6px; right: 6px;
-    background: none; border: none; cursor: pointer;
-    color: var(--text3); font-size: 13px; padding: 3px;
-    border-radius: 4px; display: none;
-  }
+  .folder-del { position: absolute; top: 6px; right: 6px; background: none; border: none; cursor: pointer; color: var(--text3); font-size: 13px; padding: 3px; border-radius: 4px; display: none; }
   .folder-card:hover .folder-del { display: flex; align-items: center; }
   .folder-del:hover { color: var(--red); }
 
   /* DRAG */
   .doc-card.dragging { opacity: 0.4; cursor: grabbing; }
   .doc-card[draggable="true"] { cursor: grab; }
-  .doc-card[draggable="true"]:active { cursor: grabbing; }
-  .drop-zone-none {
-    border: 1.5px dashed transparent;
-    border-radius: var(--radius);
-    padding: 6px;
-    margin: -6px;
-    transition: border-color 0.15s, background 0.15s;
-  }
-  .drop-zone-none.drag-over-none {
-    border-color: var(--border-md);
-    background: var(--surface2);
-  }
-  .drag-hint {
-    font-size: 11px; color: var(--text3);
-    margin-top: 10px; display: none;
-    align-items: center; gap: 5px;
-  }
+  .drop-zone-none { border: 1.5px dashed transparent; border-radius: var(--radius); padding: 6px; margin: -6px; transition: border-color 0.15s, background 0.15s; }
+  .drop-zone-none.drag-over-none { border-color: var(--border-md); background: var(--surface2); }
+  .drag-hint { font-size: 11px; color: var(--text3); margin-top: 10px; display: none; align-items: center; gap: 5px; }
   .drag-hint.visible { display: flex; }
   .drag-hint i { font-size: 13px; }
 
   /* DOC GRID */
   .doc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
-  .doc-card {
-    background: var(--surface); border: 0.5px solid var(--border);
-    border-radius: var(--radius); padding: 18px; cursor: pointer;
-    transition: border-color 0.15s, box-shadow 0.15s; position: relative;
-  }
+  .doc-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 18px; cursor: pointer; transition: border-color 0.15s, box-shadow 0.15s; position: relative; }
   .doc-card:hover { border-color: var(--border-md); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
   .doc-card-title { font-size: 14px; font-weight: 500; margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .doc-card-preview { font-size: 12px; color: var(--text3); line-height: 1.65; height: 40px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; margin-bottom: 12px; }
   .doc-card-meta { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
-  .doc-card-del {
-    position: absolute; top: 10px; right: 10px;
-    background: none; border: none; cursor: pointer;
-    color: var(--text3); font-size: 14px; padding: 4px;
-    border-radius: 4px; display: none; transition: color 0.15s;
-  }
+  .doc-card-del { position: absolute; top: 10px; right: 10px; background: none; border: none; cursor: pointer; color: var(--text3); font-size: 14px; padding: 4px; border-radius: 4px; display: none; transition: color 0.15s; }
   .doc-card:hover .doc-card-del { display: flex; align-items: center; }
   .doc-card-del:hover { color: var(--red); }
-
-  .new-card {
-    border: 1.5px dashed var(--border-md); background: transparent;
-    display: flex; flex-direction: column; align-items: center;
-    justify-content: center; gap: 8px; min-height: 120px; color: var(--text3);
-  }
+  .new-card { border: 1.5px dashed var(--border-md); background: transparent; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; min-height: 120px; color: var(--text3); }
   .new-card:hover { border-color: var(--text2); color: var(--text2); background: var(--surface2); }
   .new-card i { font-size: 22px; }
   .new-card span { font-size: 13px; }
 
-  /* FILTER BAR */
+  /* FILTER */
   .filter-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
-  .filter-chip {
-    display: inline-flex; align-items: center; gap: 5px;
-    padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 500;
-    border: 0.5px solid var(--border-md); background: var(--surface);
-    color: var(--text2); cursor: pointer; transition: all 0.15s;
-  }
+  .filter-chip { display: inline-flex; align-items: center; gap: 5px; padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; border: 0.5px solid var(--border-md); background: var(--surface); color: var(--text2); cursor: pointer; transition: all 0.15s; }
   .filter-chip:hover { background: var(--surface2); color: var(--text); }
   .filter-chip.active { background: var(--text); color: var(--bg); border-color: var(--text); }
   .filter-chip i { font-size: 13px; }
 
   /* MODAL */
-  .modal-overlay {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.35);
-    display: flex; align-items: center; justify-content: center;
-    z-index: 100; padding: 20px;
-  }
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.35); display: flex; align-items: center; justify-content: center; z-index: 100; padding: 20px; }
   .modal-overlay.hidden { display: none; }
-  .modal {
-    background: var(--surface); border-radius: var(--radius);
-    border: 0.5px solid var(--border-md); padding: 24px;
-    width: 100%; max-width: 380px; box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-  }
+  .modal { background: var(--surface); border-radius: var(--radius); border: 0.5px solid var(--border-md); padding: 24px; width: 100%; max-width: 380px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); }
   .modal h3 { font-size: 16px; font-weight: 600; margin-bottom: 16px; }
-  .modal-input {
-    width: 100%; padding: 9px 13px; border: 0.5px solid var(--border-md);
-    border-radius: var(--radius-sm); font-size: 14px; font-family: inherit;
-    background: var(--surface2); color: var(--text); outline: none; margin-bottom: 16px;
-  }
-  .modal-input:focus { border-color: var(--border-md); background: var(--surface); }
+  .modal-input { width: 100%; padding: 9px 13px; border: 0.5px solid var(--border-md); border-radius: var(--radius-sm); font-size: 14px; font-family: inherit; background: var(--surface2); color: var(--text); outline: none; margin-bottom: 16px; }
+  .modal-input:focus { background: var(--surface); }
   .modal-actions { display: flex; justify-content: flex-end; gap: 8px; }
 
   /* EDITOR */
   .editor-layout { display: flex; flex-direction: column; gap: 14px; }
-  .title-input {
-    width: 100%; font-size: 24px; font-weight: 600; letter-spacing: -0.4px;
-    border: none; outline: none; background: transparent; color: var(--text);
-    padding: 0 0 10px; border-bottom: 1.5px solid var(--border); font-family: inherit; transition: border-color 0.15s;
-  }
+  .title-input { width: 100%; font-size: 24px; font-weight: 600; letter-spacing: -0.4px; border: none; outline: none; background: transparent; color: var(--text); padding: 0 0 10px; border-bottom: 1.5px solid var(--border); font-family: inherit; transition: border-color 0.15s; }
   .title-input:focus { border-bottom-color: var(--border-md); }
   .title-input::placeholder { color: var(--text3); }
   .editor-toolbar { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
   .editor-toolbar .spacer { flex: 1; }
-  .folder-select {
-    padding: 7px 12px; border-radius: var(--radius-sm);
-    border: 0.5px solid var(--border-md); background: var(--surface);
-    color: var(--text2); font-size: 13px; cursor: pointer;
-    font-family: inherit; outline: none; transition: all 0.15s;
-  }
+  .folder-select { padding: 7px 12px; border-radius: var(--radius-sm); border: 0.5px solid var(--border-md); background: var(--surface); color: var(--text2); font-size: 13px; cursor: pointer; font-family: inherit; outline: none; transition: all 0.15s; }
   .folder-select:hover { background: var(--surface2); }
-
-  .body-textarea {
-    width: 100%; min-height: 280px; padding: 18px;
-    border: 0.5px solid var(--border); border-radius: var(--radius);
-    font-size: 15px; line-height: 1.9; resize: vertical;
-    background: var(--surface); color: var(--text); font-family: inherit;
-    outline: none; transition: border-color 0.15s;
-  }
+  .body-textarea { width: 100%; min-height: 280px; padding: 18px; border: 0.5px solid var(--border); border-radius: var(--radius); font-size: 15px; line-height: 1.9; resize: vertical; background: var(--surface); color: var(--text); font-family: inherit; outline: none; transition: border-color 0.15s; }
   .body-textarea:focus { border-color: var(--border-md); }
   .body-textarea::placeholder { color: var(--text3); }
   .editor-footer { display: flex; align-items: center; justify-content: space-between; }
   .sent-count { font-size: 12px; color: var(--text3); }
   .translation-wrap { margin-top: 4px; }
   .translation-label { font-size: 12px; font-weight: 500; color: var(--text2); margin-bottom: 6px; display: flex; align-items: center; gap: 5px; }
-  .translation-box {
-    background: var(--surface); border: 0.5px solid var(--border);
-    border-radius: var(--radius); padding: 16px 18px;
-    font-size: 14px; line-height: 1.85; color: var(--text2);
-  }
+  .translation-box { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 16px 18px; font-size: 14px; line-height: 1.85; color: var(--text2); }
   .translation-box.loading { opacity: 0.5; }
 
-  /* MEMO */
-  .memo-tabs {
-    display: flex; border: 0.5px solid var(--border-md);
-    border-radius: var(--radius-sm); overflow: hidden; width: fit-content; margin-bottom: 22px;
-  }
-  .memo-tab {
-    padding: 7px 20px; font-size: 13px; cursor: pointer;
-    background: var(--surface); border: none; color: var(--text2);
-    transition: all 0.15s; font-family: inherit;
-  }
+  /* MEMO MODE */
+  .memo-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 22px; }
+  .memo-tabs { display: flex; border: 0.5px solid var(--border-md); border-radius: var(--radius-sm); overflow: hidden; width: fit-content; }
+  .memo-tab { padding: 7px 20px; font-size: 13px; cursor: pointer; background: var(--surface); border: none; color: var(--text2); transition: all 0.15s; font-family: inherit; }
   .memo-tab.active { background: var(--text); color: var(--bg); }
   .memo-content { display: none; }
   .memo-content.active { display: block; }
+
+  /* READ TAB */
   .read-info { font-size: 12px; color: var(--text3); margin-bottom: 16px; }
   .read-view { display: flex; flex-direction: column; gap: 4px; }
-  .read-row { display: flex; gap: 12px; align-items: flex-start; padding: 10px 14px; border-radius: var(--radius-sm); transition: background 0.1s; cursor: default; }
+  .read-row { display: flex; gap: 12px; align-items: flex-start; padding: 10px 14px; border-radius: var(--radius-sm); transition: background 0.1s; }
   .read-row:hover { background: var(--surface2); }
   .read-num { font-size: 11px; color: var(--text3); min-width: 22px; padding-top: 3px; font-variant-numeric: tabular-nums; text-align: right; }
   .read-text { flex: 1; }
   .read-en { font-size: 14px; line-height: 1.8; }
-  .read-kr { font-size: 12px; color: var(--text2); margin-top: 3px; display: none; }
-  .read-row:hover .read-kr { display: block; }
-  .read-kr-wrap { display: none !important; align-items: flex-start; gap: 6px; margin-top: 2px; }
-  .read-row:hover .read-kr-wrap { display: flex !important; }
+
+  /* KR */
+  .read-kr-wrap { display: none; align-items: flex-start; gap: 4px; margin-top: 3px; }
+  .read-row:hover .read-kr-wrap { display: flex; }
   .kr-always .read-kr-wrap { display: flex !important; }
-  .kr-always .read-kr { display: block !important; }
+  .read-kr { font-size: 12px; color: var(--text2); flex: 1; cursor: pointer; border-radius: 4px; padding: 1px 3px; transition: background 0.1s; }
+  .read-kr:hover { background: var(--border); }
+  .read-kr-empty { color: var(--text3); font-style: italic; }
+  .kr-edit-btn { flex-shrink: 0; background: none; border: none; cursor: pointer; color: var(--text3); font-size: 12px; padding: 2px 4px; border-radius: 4px; opacity: 0; transition: opacity 0.15s; }
+  .read-row:hover .kr-edit-btn { opacity: 1; }
+  .kr-edit-btn:hover { color: var(--text2); background: var(--border); }
+
+  /* KR INLINE EDIT */
+  .kr-editing { background: var(--surface2); border-radius: 6px; padding: 6px 8px; flex: 1; }
+  .kr-edit-textarea { width: 100%; border: 0.5px solid var(--border-md); border-radius: var(--radius-sm); padding: 6px 8px; font-size: 13px; font-family: inherit; line-height: 1.6; background: var(--surface); color: var(--text); resize: none; outline: none; min-height: 36px; display: block; margin-bottom: 6px; }
+  .kr-edit-textarea:focus { border-color: var(--sky-text); }
+  .kr-edit-actions { display: flex; gap: 6px; justify-content: flex-end; }
+
+  /* WRITE TAB */
   .write-info { font-size: 12px; color: var(--text2); margin-bottom: 16px; padding: 10px 14px; background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius-sm); line-height: 1.65; }
   .write-area { display: flex; flex-direction: column; gap: 8px; }
   .write-row { display: flex; gap: 10px; align-items: flex-start; }
   .write-num { font-size: 11px; color: var(--text3); min-width: 22px; padding-top: 11px; text-align: right; font-variant-numeric: tabular-nums; }
-  .write-input {
-    flex: 1; padding: 9px 13px; border: 0.5px solid var(--border);
-    border-radius: var(--radius-sm); font-size: 14px; line-height: 1.75;
-    font-family: inherit; background: var(--surface); color: var(--text);
-    resize: none; outline: none; min-height: 44px; overflow: hidden; transition: border-color 0.15s;
-  }
+  .write-input { flex: 1; padding: 9px 13px; border: 0.5px solid var(--border); border-radius: var(--radius-sm); font-size: 14px; line-height: 1.75; font-family: inherit; background: var(--surface); color: var(--text); resize: none; outline: none; min-height: 44px; overflow: hidden; transition: border-color 0.15s; }
   .write-input:focus { border-color: var(--border-md); }
   .write-input::placeholder { color: var(--text3); }
   .write-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px; }
+
+  /* BLANK TAB */
+  .blank-sent-row { margin-bottom: 16px; }
+  .blank-sent-label { font-size: 11px; color: var(--text3); margin-bottom: 6px; font-variant-numeric: tabular-nums; }
+  .blank-sent-text { font-size: 14px; line-height: 2.4; }
+  .blank-word { display: inline; cursor: pointer; padding: 1px 2px; border-radius: 3px; transition: background 0.1s; }
+  .blank-word:hover { background: var(--surface2); }
+  .blank-word.blanked { display: inline-flex; background: var(--surface2); border: 0.5px solid var(--border-md); border-radius: 4px; min-width: 3.5em; cursor: default; vertical-align: middle; }
+  .blank-word.blanked input { border: none; outline: none; background: transparent; font-size: 14px; font-family: inherit; color: var(--text); width: 100%; min-width: 3em; padding: 0 4px; line-height: 1.8; }
+  .blank-word.correct-blank { background: var(--green) !important; border-color: transparent !important; }
+  .blank-word.wrong-blank { background: var(--red-bg) !important; border-color: var(--red) !important; }
 
   /* RESULT */
   .result-summary { display: flex; align-items: center; gap: 16px; padding: 16px 20px; background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); margin: 20px 0 14px; }
@@ -322,45 +224,6 @@
   .score-good { background: var(--sky); color: var(--sky-text); }
   .score-bad { background: var(--red-bg); color: var(--red); }
 
-  /* EMPTY */
-  .empty { text-align: center; padding: 48px 0; color: var(--text3); }
-  .empty i { font-size: 32px; display: block; margin-bottom: 10px; }
-  .empty p { font-size: 13px; }
-
-  /* TOAST */
-  .toast {
-    position: fixed; bottom: 28px; left: 50%;
-    transform: translateX(-50%) translateY(12px);
-    background: var(--text); color: var(--bg); font-size: 13px;
-    padding: 9px 18px; border-radius: 20px; opacity: 0;
-    transition: all 0.25s; pointer-events: none; white-space: nowrap; z-index: 999;
-  }
-  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-  /* KR INLINE EDIT */
-  .read-kr-wrap { display: flex; align-items: flex-start; gap: 6px; margin-top: 2px; }
-  .read-kr-wrap .read-kr { flex: 1; margin-top: 0 !important; display: block !important; }
-  .read-kr-empty { color: var(--text3) !important; font-style: italic; }
-  .editable-kr { cursor: pointer; border-radius: 4px; transition: background 0.12s; padding: 1px 3px; }
-  .editable-kr:hover { background: var(--surface2); }
-  .kr-edit-btn {
-    flex-shrink: 0; background: none; border: none; cursor: pointer;
-    color: var(--text3); font-size: 13px; padding: 3px 5px; border-radius: 4px;
-    opacity: 0; transition: opacity 0.15s; line-height: 1;
-  }
-  .read-row:hover .kr-edit-btn { opacity: 1; }
-  .editing-kr { cursor: default; background: var(--surface2) !important; padding: 6px 8px !important; border-radius: 6px; flex: 1; }
-  .kr-edit-input {
-    width: 100%; border: 0.5px solid var(--border-md); border-radius: var(--radius-sm);
-    padding: 6px 8px; font-size: 13px; font-family: inherit; line-height: 1.6;
-    background: var(--surface); color: var(--text); resize: none; outline: none;
-    min-height: 38px; display: block; margin-bottom: 6px;
-  }
-  .kr-edit-input:focus { border-color: var(--sky-text); }
-  .kr-edit-actions { display: flex; gap: 6px; justify-content: flex-end; }
-
-  .divider { height: 0.5px; background: var(--border); margin: 24px 0; }
-
   /* HIGHLIGHT */
   .hl-yellow { background: #ffe066; border-radius: 3px; padding: 0 1px; color: #7a5500; }
   .hl-green  { background: #b6f5c8; border-radius: 3px; padding: 0 1px; color: #166534; }
@@ -373,88 +236,37 @@
     .hl-pink   { background: #4a1030; color: #f9a8d4; }
   }
 
-  /* UNIFIED HIGHLIGHT PANEL */
+  /* HIGHLIGHT PANEL */
   .hl-panel {
     position: absolute; z-index: 200;
     background: var(--surface); border: 0.5px solid var(--border-md);
-    border-radius: var(--radius); padding: 10px;
-    box-shadow: 0 6px 24px rgba(0,0,0,0.15);
-    width: 260px;
+    border-radius: var(--radius); padding: 12px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.15); width: 260px;
   }
   .hl-panel.hidden { display: none; }
-  .hl-panel-colors { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
-  .hl-panel-textarea {
-    width: 100%; border: 0.5px solid var(--border-md);
-    border-radius: var(--radius-sm); padding: 7px 9px;
-    font-size: 13px; font-family: inherit; line-height: 1.6;
-    background: var(--surface2); color: var(--text);
-    resize: none; outline: none; height: 64px;
-    display: block; margin-bottom: 8px;
-    transition: border-color 0.15s;
-  }
+  .hl-panel-top { display: flex; align-items: center; gap: 6px; margin-bottom: 10px; }
+  .hl-color-btn { width: 22px; height: 22px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: transform 0.1s; flex-shrink: 0; }
+  .hl-color-btn:hover { transform: scale(1.2); }
+  .hl-color-btn.selected { border-color: var(--text); }
+  .hl-sep { width: 0.5px; height: 18px; background: var(--border-md); margin: 0 2px; }
+  .hl-erase-btn { background: none; border: 0.5px solid var(--border-md); border-radius: var(--radius-sm); cursor: pointer; color: var(--text2); font-size: 12px; padding: 3px 8px; font-family: inherit; display: flex; align-items: center; gap: 3px; transition: all 0.1s; }
+  .hl-erase-btn:hover { background: var(--red-bg); color: var(--red); }
+  .hl-panel-textarea { width: 100%; border: 0.5px solid var(--border-md); border-radius: var(--radius-sm); padding: 7px 9px; font-size: 13px; font-family: inherit; line-height: 1.6; background: var(--surface2); color: var(--text); resize: none; outline: none; height: 60px; display: block; margin-bottom: 8px; transition: border-color 0.15s; }
   .hl-panel-textarea:focus { border-color: var(--sky-text); }
   .hl-panel-actions { display: flex; justify-content: flex-end; gap: 6px; }
-  .hl-color-btn {
-    width: 22px; height: 22px; border-radius: 50%; border: 2px solid transparent;
-    cursor: pointer; transition: transform 0.1s, border-color 0.1s;
-  }
-  .hl-color-btn:hover { transform: scale(1.2); border-color: var(--border-md); }
-  .hl-erase-btn {
-    background: none; border: 0.5px solid var(--border-md);
-    border-radius: var(--radius-sm); cursor: pointer;
-    color: var(--text2); font-size: 12px; padding: 3px 7px;
-    font-family: inherit; transition: all 0.1s;
-  }
-  .hl-erase-btn:hover { background: var(--surface2); color: var(--red); }
-  .hl-memo-btn {
-    background: none; border: 0.5px solid var(--border-md);
-    border-radius: var(--radius-sm); cursor: pointer;
-    color: var(--text2); font-size: 12px; padding: 3px 7px;
-    font-family: inherit; display: flex; align-items: center; gap: 3px; transition: all 0.1s;
-  }
-  .hl-memo-btn:hover { background: var(--sky); color: var(--sky-text); }
-  .hl-sep { width: 0.5px; height: 18px; background: var(--border-md); margin: 0 2px; }
 
   /* MEMO TOOLTIP */
-  .memo-span {
-    border-bottom: 1.5px dotted var(--sky-text);
-    cursor: pointer;
-    position: relative;
-  }
-  .memo-tooltip {
-    position: fixed; z-index: 300;
-    background: var(--text); color: var(--bg);
-    font-size: 12px; line-height: 1.6;
-    padding: 8px 12px; border-radius: var(--radius-sm);
-    max-width: 260px; pointer-events: none;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.18);
-    white-space: pre-wrap;
-  }
+  .memo-span { border-bottom: 1.5px dotted var(--sky-text); cursor: pointer; }
+  .memo-tooltip { position: fixed; z-index: 300; background: var(--text); color: var(--bg); font-size: 12px; line-height: 1.6; padding: 8px 12px; border-radius: var(--radius-sm); max-width: 260px; pointer-events: none; box-shadow: 0 4px 14px rgba(0,0,0,0.18); white-space: pre-wrap; }
   .memo-tooltip.hidden { display: none; }
 
-  /* BLANK MODE */
-  .blank-sent-row { margin-bottom: 16px; }
-  .blank-sent-label { font-size: 11px; color: var(--text3); margin-bottom: 6px; font-variant-numeric: tabular-nums; }
-  .blank-sent-text { font-size: 14px; line-height: 2.2; }
-  .blank-word {
-    display: inline; cursor: pointer; padding: 1px 2px; border-radius: 3px;
-    transition: background 0.1s;
-  }
-  .blank-word:hover { background: var(--surface2); }
-  .blank-word.blanked {
-    display: inline-block;
-    background: var(--surface2); border: 0.5px solid var(--border-md);
-    border-radius: 4px; min-width: 3.5em; cursor: default;
-    vertical-align: middle;
-  }
-  .blank-word.blanked input {
-    border: none; outline: none; background: transparent;
-    font-size: 14px; font-family: inherit; color: var(--text);
-    width: 100%; min-width: 3em; padding: 0 4px; line-height: 1.8;
-  }
-  .blank-word.correct-blank { background: var(--green) !important; border-color: transparent !important; }
-  .blank-word.wrong-blank { background: var(--red-bg) !important; border-color: var(--red) !important; }
-
+  /* EMPTY / TOAST */
+  .empty { text-align: center; padding: 48px 0; color: var(--text3); }
+  .empty i { font-size: 32px; display: block; margin-bottom: 10px; }
+  .empty p { font-size: 13px; }
+  .toast { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(12px); background: var(--text); color: var(--bg); font-size: 13px; padding: 9px 18px; border-radius: 20px; opacity: 0; transition: all 0.25s; pointer-events: none; white-space: nowrap; z-index: 999; }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .divider { height: 0.5px; background: var(--border); margin: 24px 0; }
 </style>
 </head>
 <body>
@@ -465,8 +277,6 @@
     <div class="topbar">
       <div class="topbar-logo">English Memo<span> — 영어 본문 암기</span></div>
     </div>
-
-    <!-- 폴더 섹션 -->
     <div class="section-header" style="margin-top:0">
       <h2><i class="ti ti-folder"></i>폴더</h2>
       <div class="section-actions">
@@ -475,10 +285,7 @@
     </div>
     <div class="folder-grid" id="folderGrid"></div>
     <div class="drag-hint" id="dragHint"><i class="ti ti-drag-drop"></i>문서 카드를 폴더로 드래그해서 넣을 수 있어요</div>
-
     <div class="divider"></div>
-
-    <!-- 문서 섹션 -->
     <div class="section-header">
       <h2><i class="ti ti-file-text"></i><span id="docSectionTitle">전체 문서</span></h2>
       <div class="section-actions">
@@ -494,15 +301,14 @@
       ondragover="onNoneZoneDragOver(event)"
       ondragleave="onNoneZoneDragLeave(event)"
       ondrop="onNoneZoneDrop(event)">
-    <div class="doc-grid" id="docGrid"></div>
+      <div class="doc-grid" id="docGrid"></div>
     </div>
-
-  </div><!-- /homeScreen -->
+  </div>
 
   <!-- EDITOR -->
   <div id="editorScreen" class="screen">
     <div class="topbar">
-      <button class="back-btn" onclick="goHome()" aria-label="홈으로"><i class="ti ti-arrow-left"></i></button>
+      <button class="back-btn" onclick="goHome()"><i class="ti ti-arrow-left"></i></button>
       <div class="topbar-breadcrumb">
         <span class="crumb" onclick="goHome()">홈</span>
         <span class="sep">›</span>
@@ -540,25 +346,27 @@
   <!-- MEMORIZE -->
   <div id="memorizeScreen" class="screen">
     <div class="topbar">
-      <button class="back-btn" onclick="showScreen('editorScreen')" aria-label="편집으로"><i class="ti ti-arrow-left"></i></button>
+      <button class="back-btn" onclick="showScreen('editorScreen')"><i class="ti ti-arrow-left"></i></button>
       <div class="topbar-title" id="memoTitle"></div>
     </div>
-    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:22px">
-      <div class="memo-tabs" style="margin-bottom:0">
+    <div class="memo-header">
+      <div class="memo-tabs">
         <button class="memo-tab active" id="tabRead" onclick="switchTab('read')"><i class="ti ti-book" style="font-size:14px;vertical-align:-1px"></i> 원문 보기</button>
         <button class="memo-tab" id="tabWrite" onclick="switchTab('write')"><i class="ti ti-pencil" style="font-size:14px;vertical-align:-1px"></i> 본문 적기</button>
         <button class="memo-tab" id="tabBlank" onclick="switchTab('blank')"><i class="ti ti-puzzle" style="font-size:14px;vertical-align:-1px"></i> 빈칸 채우기</button>
       </div>
-      <div style="display:flex;gap:8px;align-items:center">
-        <button class="btn" id="krToggleBtn" onclick="toggleKrVisible()" title="한글 번역 표시/숨김">
-          <i class="ti ti-language"></i><span id="krToggleLabel">번역 항상 보기</span>
-        </button>
-      </div>
+      <button class="btn" id="krToggleBtn" onclick="toggleKr()">
+        <i class="ti ti-language"></i><span id="krToggleLabel">번역 항상 보기</span>
+      </button>
     </div>
+
+    <!-- READ -->
     <div id="readTab" class="memo-content active">
-      <p class="read-info" id="readInfoText">문장 위에 마우스를 올리면 한국어 번역이 보여요. · 드래그로 구간을 선택해 메모를 남길 수 있어요.</p>
+      <p class="read-info">마우스 올리면 번역 표시 · 드래그로 구간 선택해 하이라이트/메모</p>
       <div class="read-view" id="readView"></div>
     </div>
+
+    <!-- WRITE -->
     <div id="writeTab" class="memo-content">
       <div class="write-info">
         <i class="ti ti-info-circle" style="font-size:14px;vertical-align:-2px;margin-right:4px"></i>
@@ -571,11 +379,13 @@
       </div>
       <div id="resultArea"></div>
     </div>
+
+    <!-- BLANK -->
     <div id="blankTab" class="memo-content">
       <div class="write-info">
         <i class="ti ti-puzzle" style="font-size:14px;vertical-align:-2px;margin-right:4px"></i>
-        빈칸을 채워보세요. 단어를 클릭하면 빈칸이 됩니다. 총 <strong id="blankSentTotal">0</strong>문장입니다.
-        <div style="margin-top:6px;display:flex;gap:8px;flex-wrap:wrap">
+        단어를 클릭해 빈칸으로 만들고 채워보세요. 총 <strong id="blankSentTotal">0</strong>문장입니다.
+        <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
           <button class="btn btn-sky" onclick="autoBlankRandom()"><i class="ti ti-dice"></i>랜덤 빈칸</button>
           <button class="btn" onclick="resetBlanks()"><i class="ti ti-refresh"></i>초기화</button>
           <button class="btn btn-dark" onclick="checkBlanks()"><i class="ti ti-send"></i>채점하기</button>
@@ -588,7 +398,7 @@
 
 </div>
 
-<!-- 폴더 생성/수정 모달 -->
+<!-- 폴더 모달 -->
 <div class="modal-overlay hidden" id="folderModal">
   <div class="modal">
     <h3 id="folderModalTitle">새 폴더</h3>
@@ -603,20 +413,20 @@
 
 <div class="toast" id="toast"></div>
 
-<!-- 하이라이트 + 메모 통합 패널 -->
+<!-- 하이라이트 + 메모 패널 -->
 <div class="hl-panel hidden" id="hlPanel">
-  <div class="hl-panel-colors">
-    <div class="hl-color-btn" style="background:#ffe066" onclick="applyHighlight('hl-yellow')" title="노란색"></div>
-    <div class="hl-color-btn" style="background:#b6f5c8" onclick="applyHighlight('hl-green')" title="초록색"></div>
-    <div class="hl-color-btn" style="background:#bae0ff" onclick="applyHighlight('hl-blue')" title="파란색"></div>
-    <div class="hl-color-btn" style="background:#fbc8e0" onclick="applyHighlight('hl-pink')" title="분홍색"></div>
+  <div class="hl-panel-top">
+    <div class="hl-color-btn" style="background:#ffe066" data-cls="hl-yellow" onclick="selectColor(this,'hl-yellow')" title="노란색"></div>
+    <div class="hl-color-btn" style="background:#b6f5c8" data-cls="hl-green"  onclick="selectColor(this,'hl-green')"  title="초록색"></div>
+    <div class="hl-color-btn" style="background:#bae0ff" data-cls="hl-blue"   onclick="selectColor(this,'hl-blue')"   title="파란색"></div>
+    <div class="hl-color-btn" style="background:#fbc8e0" data-cls="hl-pink"   onclick="selectColor(this,'hl-pink')"   title="분홍색"></div>
     <div class="hl-sep"></div>
-    <button class="hl-erase-btn" onclick="eraseHighlight()"><i class="ti ti-eraser" style="font-size:12px"></i>지우기</button>
+    <button class="hl-erase-btn" onclick="eraseHL()"><i class="ti ti-eraser" style="font-size:12px"></i>지우기</button>
   </div>
-  <textarea class="hl-panel-textarea" id="memoTextInput" placeholder="메모 (선택사항)"></textarea>
+  <textarea class="hl-panel-textarea" id="hlMemoInput" placeholder="메모 입력 (선택사항)"></textarea>
   <div class="hl-panel-actions">
     <button class="btn" onclick="closeHlPanel()">취소</button>
-    <button class="btn btn-dark" onclick="saveMemoInput()">저장</button>
+    <button class="btn btn-dark" onclick="saveHL()">저장</button>
   </div>
 </div>
 
@@ -630,10 +440,11 @@ const LS_FOLDERS = 'english_memo_folders';
 let docs = [];
 let folders = [];
 let currentId = null;
-let currentFilter = 'all';   // 'all' | 'folder' | 'none'
-let activeFolderId = null;   // 폴더 클릭 시 설정
-let editingFolderId = null;  // 폴더 수정 시
+let currentFilter = 'all';
+let activeFolderId = null;
+let editingFolderId = null;
 
+// ── DATA ──
 function loadData() {
   try { docs = JSON.parse(localStorage.getItem(LS_DOCS)) || []; } catch(e) { docs = []; }
   try { folders = JSON.parse(localStorage.getItem(LS_FOLDERS)) || []; } catch(e) { folders = []; }
@@ -643,15 +454,16 @@ function saveData() {
   localStorage.setItem(LS_FOLDERS, JSON.stringify(folders));
 }
 function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2,6); }
+function esc(t) { return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
 // ── SENTENCES ──
 function parseSentences(text) {
   if (!text || !text.trim()) return [];
-  // Replace punctuation inside quotes with placeholders so they don't split sentences
-  const placeholder = text.replace(/"[^"]*"/g, m => m.replace(/[.!?]/g, '\x00'));
-  const matches = placeholder.match(/[^.!?]+[.!?]+['"'"\]\)】]*/g) || [];
-  const sents = matches.map(s => s.replace(/\x00/g, '.').trim()).filter(s => s.length > 1);
-  const rest = placeholder.replace(/[^.!?]+[.!?]+['"'"\]\)】]*/g, '').replace(/\x00/g, '.').trim();
+  // Mask punctuation inside quotes
+  const masked = text.replace(/"[^"]*"/g, m => m.replace(/[.!?]/g, '\x01'));
+  const matches = masked.match(/[^.!?]+[.!?]+['"'"\]\)】]*/g) || [];
+  const sents = matches.map(s => s.replace(/\x01/g, '.').trim()).filter(s => s.length > 1);
+  const rest = masked.replace(/[^.!?]+[.!?]+['"'"\]\)】]*/g, '').replace(/\x01/g, '.').trim();
   if (rest.length > 1) sents.push(rest);
   return sents;
 }
@@ -661,6 +473,16 @@ function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   window.scrollTo(0, 0);
+}
+
+// ── TOAST ──
+let toastTimer;
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 2000);
 }
 
 // ── FOLDER MODAL ──
@@ -680,9 +502,7 @@ function openEditFolderModal(id) {
   document.getElementById('folderModal').classList.remove('hidden');
   setTimeout(() => document.getElementById('folderNameInput').focus(), 50);
 }
-function closeFolderModal() {
-  document.getElementById('folderModal').classList.add('hidden');
-}
+function closeFolderModal() { document.getElementById('folderModal').classList.add('hidden'); }
 function confirmFolderModal() {
   const name = document.getElementById('folderNameInput').value.trim();
   if (!name) return;
@@ -692,49 +512,32 @@ function confirmFolderModal() {
   } else {
     folders.push({ id: uid(), name, createdAt: Date.now() });
   }
-  saveData();
-  closeFolderModal();
-  renderHome();
+  saveData(); closeFolderModal(); renderHome();
 }
 document.getElementById('folderModal').addEventListener('click', function(e) {
   if (e.target === this) closeFolderModal();
 });
-
-// ── INIT ──
-loadData();
-renderHome();
 
 function deleteFolder(id) {
   if (!confirm('폴더를 삭제할까요? 안에 있는 문서는 미분류로 이동됩니다.')) return;
   folders = folders.filter(f => f.id !== id);
   docs.forEach(d => { if (d.folderId === id) d.folderId = null; });
   if (activeFolderId === id) { activeFolderId = null; currentFilter = 'all'; }
-  saveData();
-  renderHome();
+  saveData(); renderHome();
 }
 
 // ── HOME ──
 function clickFolder(id) {
-  if (activeFolderId === id) {
-    activeFolderId = null;
-    currentFilter = 'all';
-  } else {
-    activeFolderId = id;
-    currentFilter = 'folder';
-  }
+  if (activeFolderId === id) { activeFolderId = null; currentFilter = 'all'; }
+  else { activeFolderId = id; currentFilter = 'folder'; }
   renderHome();
 }
-
-function setFilter(f) {
-  currentFilter = f;
-  renderHome();
-}
+function setFilter(f) { currentFilter = f; renderHome(); }
 
 function renderHome() {
-  // 폴더 그리드
   const fg = document.getElementById('folderGrid');
   if (folders.length === 0) {
-    fg.innerHTML = `<div style="font-size:13px;color:var(--text3);padding:8px 0">폴더가 없어요. 새 폴더를 만들어보세요.</div>`;
+    fg.innerHTML = '<div style="font-size:13px;color:var(--text3);padding:8px 0">폴더가 없어요. 새 폴더를 만들어보세요.</div>';
   } else {
     fg.innerHTML = folders.map(f => {
       const cnt = docs.filter(d => d.folderId === f.id && (d.body || d.title)).length;
@@ -745,18 +548,17 @@ function renderHome() {
         ondragover="onFolderDragOver(event,'${f.id}')"
         ondragleave="onFolderDragLeave(event)"
         ondrop="onFolderDrop(event,'${f.id}')">
-        <button class="folder-del" onclick="event.stopPropagation();deleteFolder('${f.id}')" aria-label="폴더 삭제"><i class="ti ti-x"></i></button>
+        <button class="folder-del" onclick="event.stopPropagation();deleteFolder('${f.id}')"><i class="ti ti-x"></i></button>
         <i class="ti ti-folder${isActive ? '-open' : ''} folder-icon"></i>
         <div class="folder-info">
           <div class="folder-name">${esc(f.name)}</div>
           <div class="folder-count">${cnt}개 문서</div>
         </div>
-        <button style="background:none;border:none;cursor:pointer;color:var(--text3);font-size:13px;padding:3px;margin-left:auto;flex-shrink:0" onclick="event.stopPropagation();openEditFolderModal('${f.id}')" aria-label="이름 변경"><i class="ti ti-pencil"></i></button>
+        <button style="background:none;border:none;cursor:pointer;color:var(--text3);font-size:13px;padding:3px;margin-left:auto;flex-shrink:0" onclick="event.stopPropagation();openEditFolderModal('${f.id}')"><i class="ti ti-pencil"></i></button>
       </div>`;
     }).join('');
   }
 
-  // 필터바 표시 여부
   const filterBar = document.getElementById('filterBar');
   if (activeFolderId) {
     filterBar.style.display = 'flex';
@@ -766,46 +568,37 @@ function renderHome() {
     filterBar.style.display = 'none';
     currentFilter = 'all';
   }
-
-  // 필터 칩 active 상태
   ['All','Folder','None'].forEach(k => {
     document.getElementById('filter'+k)?.classList.toggle('active', currentFilter === k.toLowerCase());
   });
 
-  // 섹션 타이틀
   let sectionTitle = '전체 문서';
   if (activeFolderId && currentFilter === 'folder') {
     const f = folders.find(f => f.id === activeFolderId);
     sectionTitle = f ? f.name : '폴더';
-  } else if (currentFilter === 'none') {
-    sectionTitle = '미분류 문서';
-  }
+  } else if (currentFilter === 'none') sectionTitle = '미분류 문서';
   document.getElementById('docSectionTitle').textContent = sectionTitle;
 
-  // 문서 필터링
   let filtered = docs.filter(d => d.body || d.title);
-  if (currentFilter === 'folder' && activeFolderId) {
-    filtered = filtered.filter(d => d.folderId === activeFolderId);
-  } else if (currentFilter === 'none') {
-    filtered = filtered.filter(d => !d.folderId);
-  }
+  if (currentFilter === 'folder' && activeFolderId) filtered = filtered.filter(d => d.folderId === activeFolderId);
+  else if (currentFilter === 'none') filtered = filtered.filter(d => !d.folderId);
 
-  // 문서 그리드
   const grid = document.getElementById('docGrid');
-  let html = `<div class="doc-card new-card" onclick="openNewDoc()"><i class="ti ti-plus"></i><span>새 문서</span></div>`;
+  let html = '<div class="doc-card new-card" onclick="openNewDoc()"><i class="ti ti-plus"></i><span>새 문서</span></div>';
   [...filtered].reverse().forEach(d => {
     const n = parseSentences(d.body).length;
     const folder = d.folderId ? folders.find(f => f.id === d.folderId) : null;
     html += `<div class="doc-card" data-doc-id="${d.id}" draggable="true"
-      ondragstart="onDocDragStart(event,'${d.id}')" ondragend="onDocDragEnd(event)"
+      ondragstart="onDocDragStart(event,'${d.id}')"
+      ondragend="onDocDragEnd(event)"
       onclick="openDoc('${d.id}')">
-      <button class="doc-card-del" onclick="event.stopPropagation();deleteDoc('${d.id}')" aria-label="삭제"><i class="ti ti-x"></i></button>
+      <button class="doc-card-del" onclick="event.stopPropagation();deleteDoc('${d.id}')"><i class="ti ti-x"></i></button>
       <div class="doc-card-title">${esc(d.title || '제목 없음')}</div>
       <div class="doc-card-preview">${esc(d.body.slice(0, 90))}</div>
       <div class="doc-card-meta">
         <span class="pill">${n}문장</span>
         ${d.translation ? '<span class="pill pill-sky">번역완료</span>' : ''}
-        ${folder ? `<span class="pill" style="background:var(--surface2)"><i class="ti ti-folder" style="font-size:10px;vertical-align:-1px;margin-right:3px"></i>${esc(folder.name)}</span>` : ''}
+        ${folder ? `<span class="pill"><i class="ti ti-folder" style="font-size:10px;vertical-align:-1px;margin-right:3px"></i>${esc(folder.name)}</span>` : ''}
       </div>
     </div>`;
   });
@@ -813,18 +606,22 @@ function renderHome() {
 }
 
 function openNewDoc() {
-  const doc = { id: uid(), title: '', body: '', translation: '', folderId: activeFolderId || null, createdAt: Date.now() };
+  const doc = { id: uid(), title: '', body: '', translation: '', translationArr: [], folderId: activeFolderId || null, createdAt: Date.now(), annotations: [] };
   docs.push(doc);
   saveData();
   currentId = doc.id;
   loadEditor(doc);
   showScreen('editorScreen');
 }
-
 function openDoc(id) {
   currentId = id;
   const doc = docs.find(d => d.id === id);
   if (doc) { loadEditor(doc); showScreen('editorScreen'); }
+}
+function deleteDoc(id) {
+  if (!confirm('이 문서를 삭제할까요?')) return;
+  docs = docs.filter(d => d.id !== id);
+  saveData(); renderHome();
 }
 
 // ── EDITOR ──
@@ -842,13 +639,11 @@ function loadEditor(doc) {
     document.getElementById('translationWrap').style.display = 'none';
   }
 }
-
 function populateFolderSelect(selectedId) {
   const sel = document.getElementById('folderSelect');
   sel.innerHTML = '<option value="">📁 폴더 없음</option>' +
     folders.map(f => `<option value="${f.id}"${f.id === selectedId ? ' selected' : ''}>${esc(f.name)}</option>`).join('');
 }
-
 function onFolderSelectChange() {
   const doc = docs.find(d => d.id === currentId);
   if (!doc) return;
@@ -856,94 +651,80 @@ function onFolderSelectChange() {
   updateEditorBreadcrumb(doc.folderId);
   saveData();
 }
-
 function updateEditorBreadcrumb(folderId) {
   const crumbEl = document.getElementById('editorFolderCrumb');
   const sepEl = document.getElementById('editorFolderSep');
   const folder = folderId ? folders.find(f => f.id === folderId) : null;
-  if (folder) {
-    crumbEl.textContent = folder.name;
-    crumbEl.style.display = 'inline';
-    sepEl.style.display = 'inline';
-  } else {
-    crumbEl.style.display = 'none';
-    sepEl.style.display = 'none';
-  }
+  if (folder) { crumbEl.textContent = folder.name; crumbEl.style.display = ''; sepEl.style.display = ''; }
+  else { crumbEl.style.display = 'none'; sepEl.style.display = 'none'; }
 }
-
 function onTitleInput() {
-  const val = document.getElementById('docTitleInput').value;
-  document.getElementById('editorTopTitle').textContent = val || '새 문서';
+  document.getElementById('editorTopTitle').textContent = document.getElementById('docTitleInput').value || '새 문서';
 }
 function onBodyInput() { updateSentCount(); }
 function updateSentCount() {
   const n = parseSentences(document.getElementById('bodyInput').value).length;
-  document.getElementById('sentCount').textContent = `문장 ${n}개`;
+  document.getElementById('sentCount').textContent = '문장 ' + n + '개';
 }
-
 function saveDoc() {
   const doc = docs.find(d => d.id === currentId);
   if (!doc) return;
   doc.title = document.getElementById('docTitleInput').value.trim() || '제목 없음';
   doc.body = document.getElementById('bodyInput').value.trim();
-  saveData();
-  renderHome();
-  toast('저장했어요 ✓');
+  saveData(); toast('저장됐어요 ✓');
 }
-
+function goHome() { saveDoc(); renderHome(); showScreen('homeScreen'); }
 function deleteCurrentDoc() {
   if (!confirm('이 문서를 삭제할까요?')) return;
   docs = docs.filter(d => d.id !== currentId);
   saveData(); renderHome(); showScreen('homeScreen');
 }
-function deleteDoc(id) {
-  if (!confirm('이 문서를 삭제할까요?')) return;
-  docs = docs.filter(d => d.id !== id);
-  saveData(); renderHome();
-}
-
-function goHome() { saveDoc(); renderHome(); showScreen('homeScreen'); }
-
 document.addEventListener('keydown', e => {
-  if ((e.ctrlKey || e.metaKey) && e.key === 's') {
-    e.preventDefault();
-    if (document.querySelector('.screen.active')?.id === 'editorScreen') saveDoc();
-  }
+  if ((e.ctrlKey || e.metaKey) && e.key === 's') { e.preventDefault(); saveDoc(); }
 });
 
-// ── TRANSLATION ──
+// ── TRANSLATE ──
 async function translateDoc() {
-  const body = document.getElementById('bodyInput').value.trim();
-  if (!body) { toast('먼저 영어 본문을 입력해주세요.'); return; }
-  const btn = event.currentTarget;
-  btn.disabled = true;
-  btn.innerHTML = '<i class="ti ti-loader-2"></i>번역 중...';
+  const doc = docs.find(d => d.id === currentId);
+  if (!doc) return;
+  doc.body = document.getElementById('bodyInput').value.trim();
+  if (!doc.body) { toast('본문을 먼저 입력해주세요.'); return; }
+  const sents = parseSentences(doc.body);
+  if (!sents.length) { toast('문장을 인식하지 못했어요.'); return; }
+  const btn = document.querySelector('[onclick="translateDoc()"]');
+  btn.disabled = true; btn.innerHTML = '<i class="ti ti-loader"></i>번역 중...';
   document.getElementById('translationWrap').style.display = 'block';
   const box = document.getElementById('translationBox');
-  box.textContent = '번역하는 중...';
-  box.classList.add('loading');
+  box.textContent = '번역 중...'; box.classList.add('loading');
   try {
-    const sents = parseSentences(body);
     const results = [];
     for (const s of sents) {
-      const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(s)}&langpair=en|ko`);
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-6', max_tokens: 300,
+          messages: [{ role: 'user', content: '다음 영어 문장을 자연스러운 한국어로 번역해줘. 번역문만 출력해: ' + s }]
+        })
+      });
       const data = await res.json();
-      results.push(data.responseData?.translatedText || s);
+      results.push(data.content?.[0]?.text?.trim() || '');
     }
-    const translated = results.join(' ');
-    box.textContent = translated;
+    doc.translation = results.join(' ');
+    doc.translationArr = results;
+    saveData();
+    box.textContent = doc.translation;
     box.classList.remove('loading');
-    const doc = docs.find(d => d.id === currentId);
-    if (doc) { doc.translation = translated; doc.translationArr = results; saveData(); }
-  } catch(e) {
-    box.textContent = '번역 중 오류가 발생했어요.';
+  } catch(err) {
+    box.textContent = '번역 실패. 다시 시도해주세요.';
     box.classList.remove('loading');
   }
-  btn.disabled = false;
-  btn.innerHTML = '<i class="ti ti-language"></i>한국어 번역';
+  btn.disabled = false; btn.innerHTML = '<i class="ti ti-language"></i>한국어 번역';
 }
 
 // ── MEMORIZE ──
+let krAlways = false;
+
 function goMemorize() {
   const doc = docs.find(d => d.id === currentId);
   if (!doc) return;
@@ -952,50 +733,106 @@ function goMemorize() {
   saveData();
   if (!doc.body) { toast('본문을 먼저 입력해주세요.'); return; }
   document.getElementById('memoTitle').textContent = doc.title;
-  renderReadTab(doc); renderWriteTab(doc); renderBlankTab(doc); switchTab('read');
+  krAlways = false;
+  document.getElementById('krToggleLabel').textContent = '번역 항상 보기';
+  document.getElementById('krToggleBtn').classList.remove('btn-sky');
+  renderReadTab(doc); renderWriteTab(doc); renderBlankTab(doc);
+  switchTab('read');
   showScreen('memorizeScreen');
+}
+
+function switchTab(tab) {
+  ['read','write','blank'].forEach(t => {
+    const tid = t.charAt(0).toUpperCase() + t.slice(1);
+    document.getElementById('tab' + tid).classList.toggle('active', t === tab);
+    document.getElementById(t + 'Tab').classList.toggle('active', t === tab);
+  });
+}
+
+function toggleKr() {
+  krAlways = !krAlways;
+  document.getElementById('readView').classList.toggle('kr-always', krAlways);
+  document.getElementById('krToggleLabel').textContent = krAlways ? '번역 숨기기' : '번역 항상 보기';
+  document.getElementById('krToggleBtn').classList.toggle('btn-sky', krAlways);
+}
+
+// ── READ TAB ──
+function getKrs(doc) {
+  if (doc.translationArr && doc.translationArr.length) return doc.translationArr;
+  if (doc.translation) return parseSentences(doc.translation);
+  return [];
 }
 
 function renderReadTab(doc) {
   const sents = parseSentences(doc.body);
-  const krs = doc.translationArr || (doc.translation ? parseSentences(doc.translation) : []);
-  // ensure array length matches sentences
-  const krsFull = sents.map((_, i) => krs[i] || '');
-  document.getElementById('readView').innerHTML = sents.map((s, i) => `
-    <div class="read-row" data-sent-idx="${i}">
+  const krs = getKrs(doc);
+  document.getElementById('readView').innerHTML = sents.map((s, i) => {
+    const krText = krs[i] || '';
+    return `<div class="read-row" data-sent-idx="${i}">
       <span class="read-num">${i+1}</span>
       <div class="read-text">
-        <div class="read-en" id="readEn_${i}">${buildReadEnHtml(s, i, doc)}</div>
+        <div class="read-en" id="readEn_${i}">${buildEnHtml(s, i, doc)}</div>
         <div class="read-kr-wrap">
-          ${krsFull[i]
-            ? `<div class="read-kr editable-kr" id="readKr_${i}" onclick="editKr(${i})">${esc(krsFull[i])}</div>`
-            : `<div class="read-kr editable-kr read-kr-empty" id="readKr_${i}" onclick="editKr(${i})">번역 없음</div>`
-          }
+          <div class="read-kr${krText ? '' : ' read-kr-empty'}" id="readKr_${i}" onclick="editKr(${i})">${krText ? esc(krText) : '번역 없음'}</div>
           <button class="kr-edit-btn" onclick="editKr(${i})" title="번역 수정"><i class="ti ti-pencil"></i></button>
         </div>
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
+  if (krAlways) document.getElementById('readView').classList.add('kr-always');
 }
 
+function buildEnHtml(sentence, sentIdx, doc) {
+  const anns = ((doc.annotations || []).filter(a => a.sentIdx === sentIdx)).sort((a,b) => a.start - b.start);
+  if (!anns.length) return esc(sentence);
+  let result = '', i = 0;
+  while (i < sentence.length) {
+    const ann = anns.find(a => a.start === i && a.end > i);
+    if (ann) {
+      const chunk = esc(sentence.slice(ann.start, ann.end));
+      const cls = ann.hlClass || '';
+      const memo = ann.memo || '';
+      if (memo) {
+        result += `<span class="${cls} memo-span" data-ann-id="${ann.id}"
+          onmouseenter="showTooltip(event,${JSON.stringify(memo)})"
+          onmouseleave="hideTooltip()"
+          onclick="openHlPanelForAnn('${ann.id}')">${chunk}</span>`;
+      } else {
+        result += `<span class="${cls}" data-ann-id="${ann.id}"
+          onclick="openHlPanelForAnn('${ann.id}')">${chunk}</span>`;
+      }
+      i = ann.end;
+    } else {
+      result += esc(sentence[i]);
+      i++;
+    }
+  }
+  return result;
+}
+
+// ── KR EDIT ──
 function editKr(idx) {
   const doc = docs.find(d => d.id === currentId);
   if (!doc) return;
   const sents = parseSentences(doc.body);
-  if (!doc.translationArr) doc.translationArr = sents.map((_, i) => (doc.translation ? parseSentences(doc.translation)[i] : '') || '');
+  if (!doc.translationArr || !doc.translationArr.length) {
+    const base = getKrs(doc);
+    doc.translationArr = sents.map((_, i) => base[i] || '');
+  }
+  while (doc.translationArr.length < sents.length) doc.translationArr.push('');
   const current = doc.translationArr[idx] || '';
-  const el = document.getElementById('readKr_' + idx);
-  if (!el || el.querySelector('textarea')) return;
+  const wrap = document.getElementById('readKr_' + idx)?.parentElement;
+  if (!wrap || wrap.querySelector('textarea')) return;
 
-  el.classList.add('editing-kr');
-  el.removeAttribute('onclick');
-  el.innerHTML = `<textarea class="kr-edit-input" id="krEditInput_${idx}" spellcheck="false">${esc(current)}</textarea>
+  wrap.innerHTML = `<div class="kr-editing">
+    <textarea class="kr-edit-textarea" id="krTA_${idx}" spellcheck="false">${esc(current)}</textarea>
     <div class="kr-edit-actions">
       <button class="btn" onclick="cancelKr(${idx})">취소</button>
       <button class="btn btn-dark" onclick="saveKr(${idx})">저장</button>
-    </div>`;
-  const ta = document.getElementById('krEditInput_' + idx);
-  ta.focus();
-  ta.setSelectionRange(ta.value.length, ta.value.length);
+    </div>
+  </div>`;
+  const ta = document.getElementById('krTA_' + idx);
+  ta.focus(); ta.setSelectionRange(ta.value.length, ta.value.length);
   ta.addEventListener('keydown', e => {
     if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); saveKr(idx); }
     if (e.key === 'Escape') cancelKr(idx);
@@ -1005,17 +842,12 @@ function editKr(idx) {
 function saveKr(idx) {
   const doc = docs.find(d => d.id === currentId);
   if (!doc) return;
-  const sents = parseSentences(doc.body);
-  if (!doc.translationArr) doc.translationArr = sents.map(() => '');
-  while (doc.translationArr.length < sents.length) doc.translationArr.push('');
-  const newVal = (document.getElementById('krEditInput_' + idx)?.value || '').trim();
-  doc.translationArr[idx] = newVal;
+  const val = (document.getElementById('krTA_' + idx)?.value || '').trim();
+  doc.translationArr[idx] = val;
   doc.translation = doc.translationArr.join(' ');
   saveData();
-  const wasKrAlways = krAlways;
   renderReadTab(doc);
-  if (wasKrAlways) document.getElementById('readView').classList.add('kr-always');
-  toast('번역을 수정했어요 ✓');
+  toast('번역 수정됐어요 ✓');
 }
 
 function cancelKr(idx) {
@@ -1023,40 +855,166 @@ function cancelKr(idx) {
   if (doc) renderReadTab(doc);
 }
 
-function buildReadEnHtml(sentence, sentIdx, doc) {
-  // Apply saved highlights and memos
-  const annotations = (doc.annotations || []).filter(a => a.sentIdx === sentIdx);
-  if (!annotations.length) return esc(sentence);
-  // Build annotated HTML character by character
-  let result = '';
-  const chars = [...sentence];
-  let i = 0;
-  while (i < chars.length) {
-    const ann = annotations.find(a => a.start === i);
-    if (ann && ann.end > i) {
-      const chunk = esc(sentence.slice(ann.start, ann.end));
-      if (ann.memo) {
-        result += `<span class="${ann.hlClass || ''} memo-span" data-ann-id="${ann.id}"
-          onmouseenter="showMemoTooltip(event,'${esc(ann.memo).replace(/'/g,"&#39;")}')"
-          onmouseleave="hideMemoTooltip()"
-          onclick="editAnnotation('${ann.id}')">${chunk}</span>`;
-      } else {
-        result += `<span class="${ann.hlClass || ''}" data-ann-id="${ann.id}">${chunk}</span>`;
-      }
-      i = ann.end;
-    } else {
-      result += esc(chars[i]);
-      i++;
-    }
+// ── HIGHLIGHT / MEMO ──
+let hlSelection = null;  // { sentIdx, start, end }
+let hlAnnId = null;      // annotation being edited
+let selectedHlClass = 'hl-yellow';
+
+document.addEventListener('mouseup', e => {
+  if (e.target.closest('#hlPanel') || e.target.closest('.memo-tooltip')) return;
+  const memorizeScreen = document.getElementById('memorizeScreen');
+  if (!memorizeScreen.classList.contains('active')) { closeHlPanel(); return; }
+
+  const sel = window.getSelection();
+  if (!sel || sel.isCollapsed) { closeHlPanel(); return; }
+
+  const readEnEl = findReadEn(sel.anchorNode);
+  if (!readEnEl) { closeHlPanel(); return; }
+
+  const idx = parseInt(readEnEl.id.replace('readEn_', ''));
+  const doc = docs.find(d => d.id === currentId);
+  if (!doc) return;
+
+  const range = sel.getRangeAt(0);
+  const s0 = getTextOff(readEnEl, range.startContainer, range.startOffset);
+  const s1 = getTextOff(readEnEl, range.endContainer, range.endOffset);
+  const start = Math.min(s0, s1), end = Math.max(s0, s1);
+  if (start >= end) { closeHlPanel(); return; }
+
+  hlSelection = { sentIdx: idx, start, end };
+  hlAnnId = null;
+
+  // Pre-fill if existing annotation in this range
+  const existing = (doc.annotations || []).find(a =>
+    a.sentIdx === idx && a.start === start && a.end === end);
+  if (existing) {
+    hlAnnId = existing.id;
+    selectedHlClass = existing.hlClass || 'hl-yellow';
+  } else {
+    selectedHlClass = 'hl-yellow';
   }
-  return result;
+
+  updateColorBtns();
+  document.getElementById('hlMemoInput').value = existing?.memo || '';
+
+  const rect = range.getBoundingClientRect();
+  positionHlPanel(rect.left + rect.width / 2, rect.bottom + window.scrollY + 8);
+});
+
+function findReadEn(node) {
+  let cur = node;
+  while (cur && cur !== document.body) {
+    if (cur.classList?.contains('read-en')) return cur;
+    cur = cur.parentElement;
+  }
+  return null;
 }
 
+function getTextOff(root, targetNode, targetOffset) {
+  let off = 0;
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  let node;
+  while ((node = walker.nextNode())) {
+    if (node === targetNode) return off + targetOffset;
+    off += node.textContent.length;
+  }
+  return off;
+}
+
+function positionHlPanel(cx, y) {
+  const panel = document.getElementById('hlPanel');
+  panel.classList.remove('hidden');
+  panel.style.position = 'absolute';
+  const pw = 260;
+  const left = Math.min(Math.max(cx - pw / 2, 8), window.innerWidth - pw - 8);
+  panel.style.left = left + 'px';
+  panel.style.top = y + 'px';
+}
+
+function closeHlPanel() {
+  document.getElementById('hlPanel').classList.add('hidden');
+  hlSelection = null;
+  hlAnnId = null;
+  window.getSelection()?.removeAllRanges();
+}
+
+function selectColor(btn, cls) {
+  selectedHlClass = cls;
+  updateColorBtns();
+}
+
+function updateColorBtns() {
+  document.querySelectorAll('.hl-color-btn').forEach(b => {
+    b.classList.toggle('selected', b.dataset.cls === selectedHlClass);
+  });
+}
+
+function saveHL() {
+  const doc = docs.find(d => d.id === currentId);
+  if (!doc || !hlSelection) { closeHlPanel(); return; }
+  if (!doc.annotations) doc.annotations = [];
+  const memo = document.getElementById('hlMemoInput').value.trim();
+
+  if (hlAnnId) {
+    // Edit existing
+    const ann = doc.annotations.find(a => a.id === hlAnnId);
+    if (ann) { ann.hlClass = selectedHlClass; ann.memo = memo; }
+  } else {
+    // Remove overlapping, add new
+    doc.annotations = doc.annotations.filter(a =>
+      !(a.sentIdx === hlSelection.sentIdx && a.start < hlSelection.end && a.end > hlSelection.start));
+    doc.annotations.push({ id: uid(), sentIdx: hlSelection.sentIdx, start: hlSelection.start, end: hlSelection.end, hlClass: selectedHlClass, memo });
+  }
+  saveData();
+  renderReadTab(doc);
+  closeHlPanel();
+  toast('저장됐어요 ✓');
+}
+
+function eraseHL() {
+  const doc = docs.find(d => d.id === currentId);
+  if (!doc) { closeHlPanel(); return; }
+  if (hlAnnId) {
+    doc.annotations = (doc.annotations || []).filter(a => a.id !== hlAnnId);
+  } else if (hlSelection) {
+    doc.annotations = (doc.annotations || []).filter(a =>
+      !(a.sentIdx === hlSelection.sentIdx && a.start < hlSelection.end && a.end > hlSelection.start));
+  }
+  saveData(); renderReadTab(doc); closeHlPanel();
+}
+
+function openHlPanelForAnn(annId) {
+  const doc = docs.find(d => d.id === currentId);
+  if (!doc) return;
+  const ann = (doc.annotations || []).find(a => a.id === annId);
+  if (!ann) return;
+  hlAnnId = annId;
+  hlSelection = { sentIdx: ann.sentIdx, start: ann.start, end: ann.end };
+  selectedHlClass = ann.hlClass || 'hl-yellow';
+  updateColorBtns();
+  document.getElementById('hlMemoInput').value = ann.memo || '';
+  const span = document.querySelector('[data-ann-id="' + annId + '"]');
+  if (span) {
+    const rect = span.getBoundingClientRect();
+    positionHlPanel(rect.left + rect.width / 2, rect.bottom + window.scrollY + 8);
+  }
+}
+
+function showTooltip(e, memo) {
+  const el = document.getElementById('memoTooltip');
+  el.textContent = memo;
+  el.classList.remove('hidden');
+  el.style.left = Math.min(e.clientX + 12, window.innerWidth - 280) + 'px';
+  el.style.top  = (e.clientY - 36) + 'px';
+}
+function hideTooltip() { document.getElementById('memoTooltip').classList.add('hidden'); }
+
+// ── WRITE TAB ──
 function renderWriteTab(doc) {
   const sents = parseSentences(doc.body);
   document.getElementById('writeSentTotal').textContent = sents.length;
-  document.getElementById('writeArea').innerHTML = sents.map((s, i) => `
-    <div class="write-row">
+  document.getElementById('writeArea').innerHTML = sents.map((s, i) =>
+    `<div class="write-row">
       <span class="write-num">${i+1}</span>
       <textarea class="write-input" id="wi_${i}" placeholder="문장 ${i+1} · ${s.length}자"
         rows="1" oninput="autoResize(this)" spellcheck="false"></textarea>
@@ -1065,13 +1023,6 @@ function renderWriteTab(doc) {
 }
 
 function autoResize(el) { el.style.height = 'auto'; el.style.height = el.scrollHeight + 'px'; }
-
-function switchTab(tab) {
-  ['read','write','blank'].forEach(t => {
-    document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1))?.classList.toggle('active', t === tab);
-    document.getElementById(t + 'Tab')?.classList.toggle('active', t === tab);
-  });
-}
 
 function resetWrite() {
   const doc = docs.find(d => d.id === currentId);
@@ -1141,272 +1092,39 @@ function calcSim(a, b) {
   return Math.round(m / Math.max(s1.length, s2.length) * 100);
 }
 
-function esc(t) {
-  return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-let toastTimer;
-function toast(msg) {
-  const el = document.getElementById('toast');
-  el.textContent = msg;
-  el.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => el.classList.remove('show'), 2000);
-}
-
-
-// ── KR TOGGLE ──
-let krAlways = false;
-function toggleKrVisible() {
-  krAlways = !krAlways;
-  document.getElementById('readView').classList.toggle('kr-always', krAlways);
-  document.getElementById('krToggleLabel').textContent = krAlways ? '번역 숨기기' : '번역 항상 보기';
-  document.getElementById('krToggleBtn').classList.toggle('btn-sky', krAlways);
-}
-
-// ── HIGHLIGHT & MEMO ──
-let hlSelection = null; // { sentIdx, start, end, text }
-let pendingMemoAnnId = null;
-
-document.addEventListener('mouseup', onTextMouseUp);
-
-function onTextMouseUp(e) {
-  // 암기 모드(원문 보기)에서만 동작
-  const memorizeScreen = document.getElementById('memorizeScreen');
-  if (!memorizeScreen || !memorizeScreen.classList.contains('active')) {
-    hideHlToolbar();
-    return;
-  }
-
-  // ignore clicks inside toolbar/popup
-  if (e.target.closest('#hlPanel') || e.target.closest('#memoTooltip')) return;
-
-  const sel = window.getSelection();
-  if (!sel || sel.isCollapsed) {
-    hideHlToolbar();
-    return;
-  }
-
-  // Find which read-en div the selection is in
-  const anchor = sel.anchorNode;
-  const readEnEl = findReadEnParent(anchor);
-  if (!readEnEl) { hideHlToolbar(); return; }
-
-  const sentIdx = parseInt(readEnEl.id.replace('readEn_', ''));
-  const doc = docs.find(d => d.id === currentId);
-  if (!doc) { hideHlToolbar(); return; }
-
-  const sents = parseSentences(doc.body);
-  const sentence = sents[sentIdx] || '';
-  if (!sentence) { hideHlToolbar(); return; }
-
-  const range = sel.getRangeAt(0);
-  const startOff = getTextOffset(readEnEl, range.startContainer, range.startOffset);
-  const endOff   = getTextOffset(readEnEl, range.endContainer, range.endOffset);
-  const start = Math.min(startOff, endOff);
-  const end   = Math.max(startOff, endOff);
-  if (start >= end) { hideHlToolbar(); return; }
-
-  hlSelection = { sentIdx, start, end, text: sentence.slice(start, end) };
-
-  const rect = range.getBoundingClientRect();
-  showHlToolbar(rect.left + rect.width / 2, rect.bottom + window.scrollY + 6);
-}
-
-function findReadEnParent(node) {
-  let cur = node;
-  while (cur && cur !== document.body) {
-    if (cur.classList && cur.classList.contains('read-en')) return cur;
-    cur = cur.parentElement;
-  }
-  return null;
-}
-
-function getTextOffset(root, targetNode, targetOffset) {
-  let offset = 0;
-  const iter = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
-  let node;
-  while ((node = iter.nextNode())) {
-    if (node === targetNode) return offset + targetOffset;
-    offset += node.textContent.length;
-  }
-  // fallback: targetNode not found
-  return offset;
-}
-
-function showHlPanel(x, y) {
-  const panel = document.getElementById('hlPanel');
-  panel.classList.remove('hidden');
-  panel.style.position = 'absolute';
-  const pw = 260;
-  const left = Math.min(Math.max(x - pw / 2, 8), window.innerWidth - pw - 8);
-  panel.style.left = left + 'px';
-  panel.style.top = (y + window.scrollY + 6) + 'px';
-  // pre-fill memo if existing annotation
-  const doc = docs.find(d => d.id === currentId);
-  if (doc && hlSelection) {
-    const ann = (doc.annotations || []).find(a =>
-      a.sentIdx === hlSelection.sentIdx && a.start === hlSelection.start && a.end === hlSelection.end);
-    document.getElementById('memoTextInput').value = ann?.memo || '';
-  } else {
-    document.getElementById('memoTextInput').value = '';
-  }
-  setTimeout(() => document.getElementById('memoTextInput').focus(), 50);
-}
-
-function closeHlPanel() {
-  document.getElementById('hlPanel').classList.add('hidden');
-  hlSelection = null;
-  pendingMemoAnnId = null;
-  window.getSelection()?.removeAllRanges();
-}
-
-function showHlToolbar(x, y) { showHlPanel(x, y); }
-function hideHlToolbar() { closeHlPanel(); }
-
-function openMemoInput() { /* no-op: panel already open */ }
-function closeMemoInput() { closeHlPanel(); }
-
-function applyHighlight(hlClass) {
-  if (!hlSelection) return;
-  const doc = docs.find(d => d.id === currentId);
-  if (!doc) return;
-  if (!doc.annotations) doc.annotations = [];
-  doc.annotations = doc.annotations.filter(a =>
-    !(a.sentIdx === hlSelection.sentIdx && a.start < hlSelection.end && a.end > hlSelection.start)
-  );
-  const annId = uid();
-  doc.annotations.push({ id: annId, sentIdx: hlSelection.sentIdx, start: hlSelection.start, end: hlSelection.end, hlClass, memo: '' });
-  pendingMemoAnnId = annId;
-  saveData();
-  renderReadTab(doc);
-  // highlight selected color btn
-  document.querySelectorAll('.hl-color-btn').forEach(b => b.style.outline = 'none');
-  event.currentTarget.style.outline = '2.5px solid var(--text)';
-}
-
-function eraseHighlight() {
-  if (!hlSelection) return;
-  const doc = docs.find(d => d.id === currentId);
-  if (!doc || !doc.annotations) { hideHlToolbar(); return; }
-  doc.annotations = doc.annotations.filter(a =>
-    !(a.sentIdx === hlSelection.sentIdx && a.start < hlSelection.end && a.end > hlSelection.start)
-  );
-  saveData();
-  renderReadTab(doc);
-  window.getSelection()?.removeAllRanges();
-  hideHlToolbar();
-}
-
-function saveMemoInput() {
-  const doc = docs.find(d => d.id === currentId);
-  if (!doc) { closeHlPanel(); return; }
-  const memoVal = document.getElementById('memoTextInput').value.trim();
-  if (pendingMemoAnnId) {
-    const ann = (doc.annotations || []).find(a => a.id === pendingMemoAnnId);
-    if (ann) ann.memo = memoVal;
-  }
-  saveData();
-  renderReadTab(doc);
-  closeHlPanel();
-  toast('저장됐어요 ✓');
-}
-
-function editAnnotation(annId) {
-  const doc = docs.find(d => d.id === currentId);
-  if (!doc) return;
-  const ann = (doc.annotations || []).find(a => a.id === annId);
-  if (!ann) return;
-  pendingMemoAnnId = annId;
-  hlSelection = { sentIdx: ann.sentIdx, start: ann.start, end: ann.end };
-  // position panel near the clicked span
-  const span = document.querySelector('[data-ann-id="' + annId + '"]');
-  if (span) {
-    const rect = span.getBoundingClientRect();
-    showHlPanel(rect.left + rect.width / 2, rect.bottom);
-  }
-  document.getElementById('memoTextInput').value = ann.memo || '';
-}
-
-
-  const el = document.getElementById('memoTooltip');
-  el.textContent = memoText.replace(/&#39;/g, "'");
-  el.classList.remove('hidden');
-  el.style.position = 'fixed';
-  el.style.left = Math.min(e.clientX + 12, window.innerWidth - 280) + 'px';
-  el.style.top  = (e.clientY - 36) + 'px';
-
-function hideMemoTooltip() {
-  document.getElementById('memoTooltip').classList.add('hidden');
-}
-
 // ── BLANK TAB ──
-let blankState = {}; // { sentIdx: Set<wordIdx> }
-
 function renderBlankTab(doc) {
   const sents = parseSentences(doc.body);
   document.getElementById('blankSentTotal').textContent = sents.length;
-  blankState = {};
   document.getElementById('blankArea').innerHTML = sents.map((s, i) => {
-    blankState[i] = new Set();
-    const words = tokenizeWords(s);
-    const wordSpans = words.map((w, wi) => {
-      if (/^\s+$/.test(w)) return w;
-      return `<span class="blank-word" data-si="${i}" data-wi="${wi}" onclick="toggleBlank(${i},${wi})">${esc(w)}</span>`;
+    const tokens = s.split(/(\s+)/);
+    const spans = tokens.map((tok, wi) => {
+      if (/^\s+$/.test(tok)) return tok;
+      return `<span class="blank-word" data-si="${i}" data-wi="${wi}" data-word="${esc(tok)}" onclick="toggleBlank(this)">${esc(tok)}</span>`;
     }).join('');
     return `<div class="blank-sent-row">
       <div class="blank-sent-label">문장 ${i+1}</div>
-      <div class="blank-sent-text" id="blankSent_${i}">${wordSpans}</div>
+      <div class="blank-sent-text">${spans}</div>
     </div>`;
   }).join('');
   document.getElementById('blankResultArea').innerHTML = '';
 }
 
-function tokenizeWords(s) {
-  // Split into word tokens and space tokens
-  return s.split(/(\s+)/);
-}
-
-function toggleBlank(si, wi) {
-  const doc = docs.find(d => d.id === currentId);
-  if (!doc) return;
-  const sents = parseSentences(doc.body);
-  const s = sents[si];
-  const words = tokenizeWords(s);
-  const token = words.filter((w,i) => !/^\s+$/.test(w))[wi] || '';
-
-  const container = document.getElementById('blankSent_' + si);
-  // Find actual span
-  const spans = [...container.querySelectorAll('.blank-word')];
-  const span = spans.find(sp => parseInt(sp.dataset.wi) === wi);
-  if (!span) return;
-
-  if (span.classList.contains('blanked')) {
-    // Unblank
-    span.classList.remove('blanked','correct-blank','wrong-blank');
-    span.innerHTML = esc(token);
-    span.onclick = () => toggleBlank(si, wi);
-  } else {
-    // Blank it
-    span.classList.add('blanked');
-    const w = Math.max(token.length * 0.65, 2.5).toFixed(1);
-    span.innerHTML = `<input type="text" style="width:${w}em" placeholder="?" spellcheck="false" onclick="event.stopPropagation()">`;
-    span.onclick = null;
-  }
+function toggleBlank(span) {
+  if (span.classList.contains('blanked')) return;
+  const word = span.dataset.word;
+  span.classList.add('blanked');
+  const w = Math.max(word.length * 0.7, 3).toFixed(1);
+  span.innerHTML = `<input type="text" style="width:${w}em" spellcheck="false" onclick="event.stopPropagation()">`;
 }
 
 function autoBlankRandom() {
   const doc = docs.find(d => d.id === currentId);
-  if (!doc) return;
-  renderBlankTab(doc);
-  const sents = parseSentences(doc.body);
-  sents.forEach((s, si) => {
-    const container = document.getElementById('blankSent_' + si);
-    const spans = [...container.querySelectorAll('.blank-word')];
-    const content = spans.filter(sp => sp.textContent.trim().length > 2);
-    const numBlanks = Math.max(1, Math.floor(content.length * 0.3));
-    const shuffled = content.sort(() => Math.random() - 0.5).slice(0, numBlanks);
-    shuffled.forEach(sp => toggleBlank(parseInt(sp.dataset.si), parseInt(sp.dataset.wi)));
+  if (doc) renderBlankTab(doc);
+  document.querySelectorAll('.blank-sent-text').forEach(row => {
+    const spans = [...row.querySelectorAll('.blank-word')].filter(s => s.dataset.word.length > 2);
+    const n = Math.max(1, Math.floor(spans.length * 0.3));
+    spans.sort(() => Math.random() - 0.5).slice(0, n).forEach(s => toggleBlank(s));
   });
 }
 
@@ -1416,40 +1134,29 @@ function resetBlanks() {
 }
 
 function checkBlanks() {
-  const doc = docs.find(d => d.id === currentId);
-  if (!doc) return;
-  const sents = parseSentences(doc.body);
   let correct = 0, total = 0;
-  sents.forEach((s, si) => {
-    const container = document.getElementById('blankSent_' + si);
-    const spans = [...container.querySelectorAll('.blank-word.blanked')];
-    const words = tokenizeWords(s);
-    spans.forEach(sp => {
-      const wi = parseInt(sp.dataset.wi);
-      const realWords = words.filter(w => !/^\s+$/.test(w));
-      const orig = (realWords[wi] || '').toLowerCase().replace(/[^a-z0-9가-힣]/g,'');
-      const inp = (sp.querySelector('input')?.value || '').trim().toLowerCase().replace(/[^a-z0-9가-힣]/g,'');
-      total++;
-      if (inp === orig) { sp.classList.add('correct-blank'); correct++; }
-      else sp.classList.add('wrong-blank');
-    });
+  document.querySelectorAll('.blank-word.blanked').forEach(span => {
+    const orig = (span.dataset.word || '').toLowerCase().replace(/[^a-z0-9가-힣]/g,'');
+    const inp = (span.querySelector('input')?.value || '').trim().toLowerCase().replace(/[^a-z0-9가-힣]/g,'');
+    total++;
+    if (inp === orig) { span.classList.add('correct-blank'); correct++; }
+    else span.classList.add('wrong-blank');
   });
-  if (total === 0) { toast('먼저 단어를 클릭해 빈칸을 만들어보세요.'); return; }
-  const pct = Math.round(correct/total*100);
-  const emoji = pct === 100 ? '🎉' : pct >= 70 ? '👍' : '💪';
+  if (total === 0) { toast('단어를 클릭해 빈칸을 만들어보세요.'); return; }
+  const pct = Math.round(correct / total * 100);
   document.getElementById('blankResultArea').innerHTML = `
     <div class="result-summary" style="margin-top:16px">
       <div>
         <div class="result-score-big">${pct}<span style="font-size:16px;font-weight:400">%</span></div>
         <div class="result-score-label">${correct}/${total} 정답</div>
       </div>
-      <div style="font-size:22px">${emoji}</div>
+      <div style="font-size:22px">${pct===100?'🎉':pct>=70?'👍':'💪'}</div>
       <div class="result-msg">${pct===100?'모두 맞았어요!':pct>=70?'거의 다 맞았어요!':'조금 더 연습해봐요.'}</div>
     </div>`;
   document.getElementById('blankResultArea').scrollIntoView({ behavior:'smooth', block:'start' });
 }
 
-
+// ── DRAG & DROP ──
 let dragDocId = null;
 
 function onDocDragStart(e, docId) {
@@ -1472,32 +1179,26 @@ function onDocDragEnd(e) {
 }
 
 function onFolderDragOver(e, folderId) {
-  e.preventDefault();
-  e.stopPropagation();
+  e.preventDefault(); e.stopPropagation();
   e.dataTransfer.dropEffect = 'move';
   document.querySelectorAll('.folder-card').forEach(fc => fc.classList.remove('drag-over'));
-  const target = document.querySelector('[data-folder-id="' + folderId + '"]');
-  if (target) target.classList.add('drag-over');
+  document.querySelector('[data-folder-id="' + folderId + '"]')?.classList.add('drag-over');
 }
 
 function onFolderDragLeave(e) {
-  if (!e.currentTarget.contains(e.relatedTarget)) {
-    e.currentTarget.classList.remove('drag-over');
-  }
+  if (!e.currentTarget.contains(e.relatedTarget)) e.currentTarget.classList.remove('drag-over');
 }
 
 function onFolderDrop(e, folderId) {
-  e.preventDefault();
-  e.stopPropagation();
+  e.preventDefault(); e.stopPropagation();
   const docId = e.dataTransfer.getData('text/plain') || dragDocId;
   if (!docId) return;
   const doc = docs.find(d => d.id === docId);
   if (doc) {
     doc.folderId = folderId;
-    saveData();
-    renderHome();
+    saveData(); renderHome();
     const f = folders.find(f => f.id === folderId);
-    toast('"' + (doc.title || '문서') + '"를 "' + (f ? f.name : '폴더') + '"에 넣었어요');
+    toast('"' + (doc.title||'문서') + '"를 "' + (f?.name||'폴더') + '"에 넣었어요');
   }
   document.querySelectorAll('.folder-card').forEach(fc => fc.classList.remove('drag-over'));
   dragDocId = null;
@@ -1506,31 +1207,27 @@ function onFolderDrop(e, folderId) {
 function onNoneZoneDragOver(e) {
   if (!dragDocId) return;
   e.preventDefault();
-  e.dataTransfer.dropEffect = 'move';
   document.getElementById('docGridWrap').classList.add('drag-over-none');
   document.querySelectorAll('.folder-card').forEach(fc => fc.classList.remove('drag-over'));
 }
 
 function onNoneZoneDragLeave(e) {
-  if (!document.getElementById('docGridWrap').contains(e.relatedTarget)) {
+  if (!document.getElementById('docGridWrap').contains(e.relatedTarget))
     document.getElementById('docGridWrap').classList.remove('drag-over-none');
-  }
 }
 
 function onNoneZoneDrop(e) {
   e.preventDefault();
-  if (!dragDocId) return;
-  const doc = docs.find(d => d.id === dragDocId);
-  if (doc && doc.folderId) {
-    doc.folderId = null;
-    saveData();
-    renderHome();
-    toast(`"${doc.title || '문서'}"를 미분류로 이동했어요`);
-  }
+  const docId = e.dataTransfer.getData('text/plain') || dragDocId;
+  if (!docId) return;
+  const doc = docs.find(d => d.id === docId);
+  if (doc && doc.folderId) { doc.folderId = null; saveData(); renderHome(); toast('"' + (doc.title||'문서') + '"를 미분류로 이동했어요'); }
   document.getElementById('docGridWrap').classList.remove('drag-over-none');
 }
 
-
+// ── INIT ──
+loadData();
+renderHome();
 </script>
 </body>
 </html>
