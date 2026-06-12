@@ -373,15 +373,27 @@
     .hl-pink   { background: #4a1030; color: #f9a8d4; }
   }
 
-  /* HIGHLIGHT TOOLBAR */
-  .hl-toolbar {
-    position: fixed; z-index: 200;
+  /* UNIFIED HIGHLIGHT PANEL */
+  .hl-panel {
+    position: absolute; z-index: 200;
     background: var(--surface); border: 0.5px solid var(--border-md);
-    border-radius: var(--radius); padding: 6px 8px;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.14);
-    display: flex; gap: 5px; align-items: center;
+    border-radius: var(--radius); padding: 10px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.15);
+    width: 260px;
   }
-  .hl-toolbar.hidden { display: none; }
+  .hl-panel.hidden { display: none; }
+  .hl-panel-colors { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
+  .hl-panel-textarea {
+    width: 100%; border: 0.5px solid var(--border-md);
+    border-radius: var(--radius-sm); padding: 7px 9px;
+    font-size: 13px; font-family: inherit; line-height: 1.6;
+    background: var(--surface2); color: var(--text);
+    resize: none; outline: none; height: 64px;
+    display: block; margin-bottom: 8px;
+    transition: border-color 0.15s;
+  }
+  .hl-panel-textarea:focus { border-color: var(--sky-text); }
+  .hl-panel-actions { display: flex; justify-content: flex-end; gap: 6px; }
   .hl-color-btn {
     width: 22px; height: 22px; border-radius: 50%; border: 2px solid transparent;
     cursor: pointer; transition: transform 0.1s, border-color 0.1s;
@@ -419,24 +431,6 @@
     white-space: pre-wrap;
   }
   .memo-tooltip.hidden { display: none; }
-
-  /* MEMO INPUT POPUP */
-  .memo-input-popup {
-    position: fixed; z-index: 250;
-    background: var(--surface); border: 0.5px solid var(--border-md);
-    border-radius: var(--radius); padding: 12px;
-    box-shadow: 0 6px 24px rgba(0,0,0,0.16);
-    width: 280px;
-  }
-  .memo-input-popup.hidden { display: none; }
-  .memo-input-popup textarea {
-    width: 100%; border: 0.5px solid var(--border-md);
-    border-radius: var(--radius-sm); padding: 8px 10px;
-    font-size: 13px; line-height: 1.6; font-family: inherit;
-    background: var(--surface2); color: var(--text);
-    resize: none; outline: none; min-height: 70px; margin-bottom: 8px; display: block;
-  }
-  .memo-input-popup .popup-actions { display: flex; justify-content: flex-end; gap: 6px; }
 
   /* BLANK MODE */
   .blank-sent-row { margin-bottom: 16px; }
@@ -609,22 +603,19 @@
 
 <div class="toast" id="toast"></div>
 
-<!-- 하이라이트 툴바 -->
-<div class="hl-toolbar hidden" id="hlToolbar">
-  <div class="hl-color-btn" style="background:#ffe066" onclick="applyHighlight('hl-yellow')" title="노란색"></div>
-  <div class="hl-color-btn" style="background:#b6f5c8" onclick="applyHighlight('hl-green')" title="초록색"></div>
-  <div class="hl-color-btn" style="background:#bae0ff" onclick="applyHighlight('hl-blue')" title="파란색"></div>
-  <div class="hl-color-btn" style="background:#fbc8e0" onclick="applyHighlight('hl-pink')" title="분홍색"></div>
-  <div class="hl-sep"></div>
-  <button class="hl-memo-btn" onclick="openMemoInput()"><i class="ti ti-note" style="font-size:12px"></i>메모</button>
-  <button class="hl-erase-btn" onclick="eraseHighlight()">지우기</button>
-</div>
-
-<!-- 메모 입력 팝업 -->
-<div class="memo-input-popup hidden" id="memoInputPopup">
-  <textarea id="memoTextInput" placeholder="이 구간에 메모를 입력하세요..." rows="3"></textarea>
-  <div class="popup-actions">
-    <button class="btn" onclick="closeMemoInput()">취소</button>
+<!-- 하이라이트 + 메모 통합 패널 -->
+<div class="hl-panel hidden" id="hlPanel">
+  <div class="hl-panel-colors">
+    <div class="hl-color-btn" style="background:#ffe066" onclick="applyHighlight('hl-yellow')" title="노란색"></div>
+    <div class="hl-color-btn" style="background:#b6f5c8" onclick="applyHighlight('hl-green')" title="초록색"></div>
+    <div class="hl-color-btn" style="background:#bae0ff" onclick="applyHighlight('hl-blue')" title="파란색"></div>
+    <div class="hl-color-btn" style="background:#fbc8e0" onclick="applyHighlight('hl-pink')" title="분홍색"></div>
+    <div class="hl-sep"></div>
+    <button class="hl-erase-btn" onclick="eraseHighlight()"><i class="ti ti-eraser" style="font-size:12px"></i>지우기</button>
+  </div>
+  <textarea class="hl-panel-textarea" id="memoTextInput" placeholder="메모 (선택사항)"></textarea>
+  <div class="hl-panel-actions">
+    <button class="btn" onclick="closeHlPanel()">취소</button>
     <button class="btn btn-dark" onclick="saveMemoInput()">저장</button>
   </div>
 </div>
@@ -1045,7 +1036,10 @@ function buildReadEnHtml(sentence, sentIdx, doc) {
     if (ann && ann.end > i) {
       const chunk = esc(sentence.slice(ann.start, ann.end));
       if (ann.memo) {
-        result += `<span class="${ann.hlClass || ''} memo-span" data-ann-id="${ann.id}" onmouseenter="showMemoTooltip(event,'${esc(ann.memo).replace(/'/g,"&#39;")}')" onmouseleave="hideMemoTooltip()">${chunk}</span>`;
+        result += `<span class="${ann.hlClass || ''} memo-span" data-ann-id="${ann.id}"
+          onmouseenter="showMemoTooltip(event,'${esc(ann.memo).replace(/'/g,"&#39;")}')"
+          onmouseleave="hideMemoTooltip()"
+          onclick="editAnnotation('${ann.id}')">${chunk}</span>`;
       } else {
         result += `<span class="${ann.hlClass || ''}" data-ann-id="${ann.id}">${chunk}</span>`;
       }
@@ -1240,36 +1234,55 @@ function getTextOffset(root, targetNode, targetOffset) {
   return offset;
 }
 
-function showHlToolbar(x, y) {
-  const tb = document.getElementById('hlToolbar');
-  tb.classList.remove('hidden');
-  const tbW = 240;
-  const left = Math.min(Math.max(x - tbW/2, 8), window.innerWidth - tbW - 8);
-  tb.style.left = left + 'px';
-  tb.style.top  = (y + window.scrollY) + 'px';
-  // re-position to be viewport-relative
-  tb.style.position = 'absolute';
+function showHlPanel(x, y) {
+  const panel = document.getElementById('hlPanel');
+  panel.classList.remove('hidden');
+  panel.style.position = 'absolute';
+  const pw = 260;
+  const left = Math.min(Math.max(x - pw / 2, 8), window.innerWidth - pw - 8);
+  panel.style.left = left + 'px';
+  panel.style.top = (y + window.scrollY + 6) + 'px';
+  // pre-fill memo if existing annotation
+  const doc = docs.find(d => d.id === currentId);
+  if (doc && hlSelection) {
+    const ann = (doc.annotations || []).find(a =>
+      a.sentIdx === hlSelection.sentIdx && a.start === hlSelection.start && a.end === hlSelection.end);
+    document.getElementById('memoTextInput').value = ann?.memo || '';
+  } else {
+    document.getElementById('memoTextInput').value = '';
+  }
+  setTimeout(() => document.getElementById('memoTextInput').focus(), 50);
 }
 
-function hideHlToolbar() {
-  document.getElementById('hlToolbar').classList.add('hidden');
+function closeHlPanel() {
+  document.getElementById('hlPanel').classList.add('hidden');
   hlSelection = null;
+  pendingMemoAnnId = null;
+  window.getSelection()?.removeAllRanges();
 }
+
+function showHlToolbar(x, y) { showHlPanel(x, y); }
+function hideHlToolbar() { closeHlPanel(); }
+
+function openMemoInput() { /* no-op: panel already open */ }
+function closeMemoInput() { closeHlPanel(); }
 
 function applyHighlight(hlClass) {
   if (!hlSelection) return;
   const doc = docs.find(d => d.id === currentId);
   if (!doc) return;
   if (!doc.annotations) doc.annotations = [];
-  // Remove overlapping annotations for this sentence
   doc.annotations = doc.annotations.filter(a =>
     !(a.sentIdx === hlSelection.sentIdx && a.start < hlSelection.end && a.end > hlSelection.start)
   );
-  doc.annotations.push({ id: uid(), sentIdx: hlSelection.sentIdx, start: hlSelection.start, end: hlSelection.end, hlClass, memo: '' });
+  const annId = uid();
+  doc.annotations.push({ id: annId, sentIdx: hlSelection.sentIdx, start: hlSelection.start, end: hlSelection.end, hlClass, memo: '' });
+  pendingMemoAnnId = annId;
   saveData();
   renderReadTab(doc);
-  window.getSelection()?.removeAllRanges();
-  hideHlToolbar();
+  // highlight selected color btn
+  document.querySelectorAll('.hl-color-btn').forEach(b => b.style.outline = 'none');
+  event.currentTarget.style.outline = '2.5px solid var(--text)';
 }
 
 function eraseHighlight() {
@@ -1320,20 +1333,35 @@ function closeMemoInput() {
 
 function saveMemoInput() {
   const doc = docs.find(d => d.id === currentId);
-  if (!doc || !pendingMemoAnnId) { closeMemoInput(); return; }
-  const ann = (doc.annotations || []).find(a => a.id === pendingMemoAnnId);
-  if (ann) {
-    ann.memo = document.getElementById('memoTextInput').value.trim();
-    if (!ann.hlClass) ann.hlClass = 'hl-blue';
+  if (!doc) { closeHlPanel(); return; }
+  const memoVal = document.getElementById('memoTextInput').value.trim();
+  if (pendingMemoAnnId) {
+    const ann = (doc.annotations || []).find(a => a.id === pendingMemoAnnId);
+    if (ann) ann.memo = memoVal;
   }
   saveData();
   renderReadTab(doc);
-  closeMemoInput();
-  window.getSelection()?.removeAllRanges();
-  toast('메모를 저장했어요 ✓');
+  closeHlPanel();
+  toast('저장됐어요 ✓');
 }
 
-function showMemoTooltip(e, memoText) {
+function editAnnotation(annId) {
+  const doc = docs.find(d => d.id === currentId);
+  if (!doc) return;
+  const ann = (doc.annotations || []).find(a => a.id === annId);
+  if (!ann) return;
+  pendingMemoAnnId = annId;
+  hlSelection = { sentIdx: ann.sentIdx, start: ann.start, end: ann.end };
+  // position panel near the clicked span
+  const span = document.querySelector('[data-ann-id="' + annId + '"]');
+  if (span) {
+    const rect = span.getBoundingClientRect();
+    showHlPanel(rect.left + rect.width / 2, rect.bottom);
+  }
+  document.getElementById('memoTextInput').value = ann.memo || '';
+}
+
+
   const el = document.getElementById('memoTooltip');
   el.textContent = memoText.replace(/&#39;/g, "'");
   el.classList.remove('hidden');
