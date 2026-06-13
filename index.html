@@ -746,7 +746,9 @@ function goMemorize() {
   krAlways = false;
   document.getElementById('krToggleLabel').textContent = '번역 항상 보기';
   document.getElementById('krToggleBtn').classList.remove('btn-sky');
-  renderReadTab(doc); renderWriteTab(doc); renderBlankTab(doc);
+  try { renderReadTab(doc); } catch(e) { console.error('renderReadTab error', e); }
+  try { renderWriteTab(doc); } catch(e) { console.error('renderWriteTab error', e); }
+  try { renderBlankTab(doc); } catch(e) { console.error('renderBlankTab error', e); }
   switchTab('read');
   showScreen('memorizeScreen');
 }
@@ -802,7 +804,8 @@ function buildEnHtml(sentence, sentIdx, doc) {
       const chunk = esc(sentence.slice(ann.start, ann.end));
       if (memo) {
         const spanCls = (cls ? cls + ' memo-span' : 'memo-only');
-        result += `<span class="${spanCls}" data-ann-id="${ann.id}" data-memo="${esc(memo)}"
+        const safeMemo = memo.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+        result += `<span class="${spanCls}" data-ann-id="${ann.id}" data-memo="${safeMemo}"
           onclick="openHlPanelForAnn('${ann.id}')">${chunk}</span>`;
       } else if (cls) {
         result += `<span class="${cls}" data-ann-id="${ann.id}"
