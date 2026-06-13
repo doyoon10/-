@@ -258,6 +258,7 @@
   /* MEMO TOOLTIP */
   .memo-span { border-bottom: 1.5px dotted var(--sky-text); cursor: pointer; }
   .memo-only { border-bottom: 1.5px dotted var(--text3); cursor: pointer; }
+  .memo-only { border-bottom: 1.5px dotted var(--text3); cursor: pointer; }
   .memo-tooltip {
     position: fixed; z-index: 9999;
     background: var(--text); color: var(--bg);
@@ -802,17 +803,13 @@ function buildEnHtml(sentence, sentIdx, doc) {
     const ann = anns.find(a => a.start === i && a.end > i);
     if (ann) {
       const chunk = esc(sentence.slice(ann.start, ann.end));
-      if (memo) {
-        const spanCls = (cls ? cls + ' memo-span' : 'memo-only');
-        const safeMemo = memo.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-        result += `<span class="${spanCls}" data-ann-id="${ann.id}" data-memo="${safeMemo}"
-          onclick="openHlPanelForAnn('${ann.id}')">${chunk}</span>`;
-      } else if (cls) {
-        result += `<span class="${cls}" data-ann-id="${ann.id}"
-          onclick="openHlPanelForAnn('${ann.id}')">${chunk}</span>`;
-      } else {
-        result += chunk;
-      }
+      const cls = ann.hlClass || '';
+      const memo = ann.memo || '';
+      const hasMemo = memo.length > 0;
+      const spanCls = [cls, hasMemo ? 'memo-span' : '', !cls && hasMemo ? 'memo-only' : ''].filter(Boolean).join(' ');
+      const memoAttr = hasMemo ? ' data-memo="' + memo.replace(/&/g,'&amp;').replace(/"/g,'&quot;') + '"' : '';
+      result += `<span class="${spanCls}" data-ann-id="${ann.id}"${memoAttr}
+        onclick="openHlPanelForAnn('${ann.id}')">${chunk}</span>`;
       i = ann.end;
     } else {
       result += esc(sentence[i]);
@@ -1027,8 +1024,30 @@ document.addEventListener('mousemove', e => {
     el.classList.add('hidden');
   }
 });
-function showTooltip() {}
+function showTooltip(e, memo) {
+  const el = document.getElementById('memoTooltip');
+  el.textContent = memo;
+  el.classList.remove('hidden');
+  el.style.left = Math.min(e.clientX + 14, window.innerWidth - 280) + 'px';
+  el.style.top  = (e.clientY - 44) + 'px';
+}
 function hideTooltip() { document.getElementById('memoTooltip').classList.add('hidden'); }
+
+document.addEventListener('mouseover', e => {
+  const span = e.target.closest('[data-memo]');
+  if (span && span.dataset.memo) showTooltip(e, span.dataset.memo);
+});
+document.addEventListener('mouseout', e => {
+  if (e.target.closest('[data-memo]')) hideTooltip();
+});
+document.addEventListener('mousemove', e => {
+  const span = e.target.closest('[data-memo]');
+  if (span && span.dataset.memo) {
+    const el = document.getElementById('memoTooltip');
+    el.style.left = Math.min(e.clientX + 14, window.innerWidth - 280) + 'px';
+    el.style.top  = (e.clientY - 44) + 'px';
+  }
+});
 
 // ── WRITE TAB ──
 function renderWriteTab(doc) {
