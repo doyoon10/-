@@ -257,7 +257,16 @@
 
   /* MEMO TOOLTIP */
   .memo-span { border-bottom: 1.5px dotted var(--sky-text); cursor: pointer; }
-  .memo-tooltip { position: fixed; z-index: 300; background: var(--text); color: var(--bg); font-size: 12px; line-height: 1.6; padding: 8px 12px; border-radius: var(--radius-sm); max-width: 260px; pointer-events: none; box-shadow: 0 4px 14px rgba(0,0,0,0.18); white-space: pre-wrap; }
+  .memo-only { border-bottom: 1.5px dotted var(--text3); cursor: pointer; }
+  .memo-tooltip {
+    position: fixed; z-index: 9999;
+    background: var(--text); color: var(--bg);
+    font-size: 12px; line-height: 1.6; padding: 8px 12px;
+    border-radius: var(--radius-sm); max-width: 260px;
+    pointer-events: none;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.18); white-space: pre-wrap;
+    transition: opacity 0.1s;
+  }
   .memo-tooltip.hidden { display: none; }
 
   /* EMPTY / TOAST */
@@ -420,6 +429,7 @@
     <div class="hl-color-btn" style="background:#b6f5c8" data-cls="hl-green"  onclick="selectColor(this,'hl-green')"  title="초록색"></div>
     <div class="hl-color-btn" style="background:#bae0ff" data-cls="hl-blue"   onclick="selectColor(this,'hl-blue')"   title="파란색"></div>
     <div class="hl-color-btn" style="background:#fbc8e0" data-cls="hl-pink"   onclick="selectColor(this,'hl-pink')"   title="분홍색"></div>
+    <div class="hl-color-btn" style="background:transparent;border:1.5px dashed var(--border-md);font-size:10px;display:flex;align-items:center;justify-content:center;color:var(--text2)" data-cls="" onclick="selectColor(this,'')" title="색 없이 메모만">✕</div>
     <div class="hl-sep"></div>
     <button class="hl-erase-btn" onclick="eraseHL()"><i class="ti ti-eraser" style="font-size:12px"></i>지우기</button>
   </div>
@@ -793,13 +803,16 @@ function buildEnHtml(sentence, sentIdx, doc) {
       const cls = ann.hlClass || '';
       const memo = ann.memo || '';
       if (memo) {
-        result += `<span class="${cls} memo-span" data-ann-id="${ann.id}"
+        const spanCls = (cls ? cls + ' memo-span' : 'memo-only');
+        result += `<span class="${spanCls}" data-ann-id="${ann.id}"
           onmouseenter="showTooltip(event,${JSON.stringify(memo)})"
           onmouseleave="hideTooltip()"
           onclick="openHlPanelForAnn('${ann.id}')">${chunk}</span>`;
-      } else {
+      } else if (cls) {
         result += `<span class="${cls}" data-ann-id="${ann.id}"
           onclick="openHlPanelForAnn('${ann.id}')">${chunk}</span>`;
+      } else {
+        result += chunk;
       }
       i = ann.end;
     } else {
@@ -1004,8 +1017,10 @@ function showTooltip(e, memo) {
   const el = document.getElementById('memoTooltip');
   el.textContent = memo;
   el.classList.remove('hidden');
-  el.style.left = Math.min(e.clientX + 12, window.innerWidth - 280) + 'px';
-  el.style.top  = (e.clientY - 36) + 'px';
+  const x = Math.min(e.clientX + 14, window.innerWidth - 280);
+  const y = e.clientY - 44;
+  el.style.left = x + 'px';
+  el.style.top = (y < 8 ? e.clientY + 20 : y) + 'px';
 }
 function hideTooltip() { document.getElementById('memoTooltip').classList.add('hidden'); }
 
