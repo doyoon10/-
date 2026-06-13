@@ -800,13 +800,9 @@ function buildEnHtml(sentence, sentIdx, doc) {
     const ann = anns.find(a => a.start === i && a.end > i);
     if (ann) {
       const chunk = esc(sentence.slice(ann.start, ann.end));
-      const cls = ann.hlClass || '';
-      const memo = ann.memo || '';
       if (memo) {
         const spanCls = (cls ? cls + ' memo-span' : 'memo-only');
-        result += `<span class="${spanCls}" data-ann-id="${ann.id}"
-          onmouseenter="showTooltip(event,${JSON.stringify(memo)})"
-          onmouseleave="hideTooltip()"
+        result += `<span class="${spanCls}" data-ann-id="${ann.id}" data-memo="${esc(memo)}"
           onclick="openHlPanelForAnn('${ann.id}')">${chunk}</span>`;
       } else if (cls) {
         result += `<span class="${cls}" data-ann-id="${ann.id}"
@@ -1013,15 +1009,22 @@ function openHlPanelForAnn(annId) {
   }
 }
 
-function showTooltip(e, memo) {
+// ── TOOLTIP ──
+document.addEventListener('mousemove', e => {
+  const span = e.target.closest('[data-memo]');
   const el = document.getElementById('memoTooltip');
-  el.textContent = memo;
-  el.classList.remove('hidden');
-  const x = Math.min(e.clientX + 14, window.innerWidth - 280);
-  const y = e.clientY - 44;
-  el.style.left = x + 'px';
-  el.style.top = (y < 8 ? e.clientY + 20 : y) + 'px';
-}
+  if (span && span.dataset.memo) {
+    el.textContent = span.dataset.memo;
+    el.classList.remove('hidden');
+    const x = Math.min(e.clientX + 14, window.innerWidth - 280);
+    const y = e.clientY - 48;
+    el.style.left = x + 'px';
+    el.style.top = (y < 8 ? e.clientY + 20 : y) + 'px';
+  } else {
+    el.classList.add('hidden');
+  }
+});
+function showTooltip() {}
 function hideTooltip() { document.getElementById('memoTooltip').classList.add('hidden'); }
 
 // ── WRITE TAB ──
